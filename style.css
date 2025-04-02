@@ -1,0 +1,912 @@
+/* 🌟 General Navbar Styling */
+.navbar {
+  font-family: "Poppins", sans-serif;
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 20px;
+}
+
+/* 📌 Navbar Brand (Logo & Name) */
+.navbar-brand {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s ease;
+}
+
+.navbar-brand img {
+  width: 100px; /* Default Logo Size */
+  height: auto;
+}
+
+.navbar-brand:hover {
+  color: #008b8b;
+}
+
+/* 📌 Navbar Menu Items */
+.navbar-nav {
+  margin-left: auto; /* Push menu to the right */
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav .nav-link {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 15px;
+  color: #333;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* ✨ Underline Animation on Hover */
+.navbar-nav .nav-link::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 0;
+  background: #008b8b;
+  transition: width 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #008b8b;
+}
+
+/* 🔍 Search & Cart Icons */
+.navbar-nav .nav-item i {
+  font-size: 22px;
+  color: #333;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* ✨ Smooth Zoom Effect */
+.navbar-nav .nav-item i:hover {
+  color: #008b8b;
+  transform: scale(1.2);
+}
+
+/* 📱 Responsive Navbar */
+.navbar-toggler {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 5px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Fix for Incorrectly Positioned Hamburger Menu */
+.navbar-toggler-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ✅ Responsive Fixes for Mobile */
+@media (max-width: 992px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  /* Reduce Logo Size in Mobile */
+  .navbar-brand img {
+    width: 80px;
+  }
+
+  /* Adjust Brand Name Font */
+  .navbar-brand {
+    font-size: 18px;
+  }
+
+  /* Center Align Items */
+  .navbar-collapse {
+    text-align: center;
+  }
+
+  /* Stack Menu Items in Mobile */
+  .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navbar-nav .nav-item {
+    margin: 10px 0;
+  }
+
+  /* Align Hamburger Menu to Right */
+  .navbar-toggler {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+  }
+}
+
+#home {
+  background-image: url("img/home/Banner.png");
+  background-size: cover;
+  background-position: top 80px center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  /* Animation */
+  opacity: 0; /* Initially hidden */
+  transform: scale(1.1); /* Slightly zoomed in */
+  animation: fadeZoom 2s ease-in-out forwards;
+}
+
+/* Keyframes for Smooth Fade-In & Zoom Effect */
+@keyframes fadeZoom {
+  from {
+    opacity: 0;
+    transform: scale(1.1); /* Starts slightly zoomed in */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1); /* Zooms back to normal */
+  }
+}
+
+/* Center the text in the middle and shift it slightly downward */
+.hero-text {
+  position: absolute;
+  top: 60%; /* Adjusted from 50% to 55% to shift it down */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #ffcc00; /* Golden Orange - Stands out against most backgrounds */
+  font-family: "Poppins", sans-serif;
+}
+
+/* Styling for Subheading */
+.hero-text h5 {
+  font-size: 18px;
+  font-weight: 500;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-in-out forwards;
+  color: #ffd700; /* Slightly lighter golden tone */
+}
+
+/* Styling for Main Heading */
+.hero-text h1 {
+  font-size: 50px;
+  font-weight: 700;
+  margin: 10px 0;
+  opacity: 0;
+  animation: slideUp 1s ease-in-out 0.5s forwards;
+  color: #ffa500; /* A richer orange tone for contrast */
+}
+
+/* Styling for Paragraph */
+.hero-text p {
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 25px;
+  opacity: 0;
+  animation: slideUp 1s ease-in-out 1s forwards;
+  color: #ffdd99; /* Soft golden-beige for subtle contrast */
+}
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* 🌟 Feature Bar Styling */
+.feature-bar {
+  background: #f8f9fa; /* Light Grey Background */
+  padding: 60px 20px;
+  text-align: center;
+}
+
+/* 🌟 Feature Heading */
+.feature-heading {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* 🌟 Grid Layout */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* 🌟 Feature Items */
+.feature-item {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* 🌟 Feature Hover Effect */
+.feature-item:hover {
+  transform: scale(1.05);
+}
+
+/* 🌟 Feature Icons */
+.feature-item i {
+  font-size: 30px;
+  color: #008b8b;
+  margin-bottom: 10px;
+}
+
+/* 🌟 Feature Title */
+.feature-item h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* 🌟 Feature Description */
+.feature-item p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* ✅ Responsive Grid for Smaller Screens */
+@media (max-width: 1024px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .feature-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* 🌟 Product Grid Section */
+.product-grid {
+  background: #f0f0f0;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+/* 🌟 Heading */
+.product-heading {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* 🌟 Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* 🌟 Grid Item */
+.grid-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.grid-item img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* 🌟 Hover Effect */
+.grid-item:hover img {
+  transform: scale(1.1);
+}
+
+/* 🌟 Overlay */
+.overlay {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+}
+
+/* 🌟 Text & Arrow */
+.overlay h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.overlay .arrow {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* ✅ Responsive Grid */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+/* 🌟 Aesthetic Video Section */
+.promo-video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #1a1a1a, #333333);
+}
+
+/* 🌟 Text Styling */
+.video-container {
+  position: relative;
+  z-index: 2;
+}
+
+.video-heading {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(45deg, #ffcc00, #ff6600);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.video-subheading {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+}
+
+/* 🌟 Video Wrapper */
+.video-wrapper {
+  position: relative;
+  max-width: 400px;
+  margin: auto;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(255, 153, 51, 0.5);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.video-wrapper:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(255, 102, 0, 0.7);
+}
+
+/* 🌟 Video Styling */
+.video-wrapper video {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+/* General Styles shop */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+.shop-section {
+  padding: 120px 0;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.category-tile {
+  position: relative;
+  background: #f8f9fa;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, background 0.3s;
+  width: 250px;
+}
+
+.category-tile img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.category-tile:hover {
+  transform: scale(1.05);
+  background: #ff6f61;
+  color: #fff;
+}
+
+.category-tile h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.subcategory {
+  display: none;
+  list-style: none;
+  padding: 0;
+}
+
+.subcategory li {
+  margin: 5px 0;
+}
+
+.subcategory li a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 16px;
+}
+
+.category-tile:hover .subcategory {
+  display: block;
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.footer ul {
+  padding: 0;
+}
+
+.footer ul li {
+  list-style: none;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.footer i {
+  margin-right: 8px;
+}
+
+.footer img {
+  margin: 5px;
+  vertical-align: middle;
+}
+
+/* General Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Main Heading */
+h2 {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #000428;
+  text-transform: uppercase;
+}
+
+/* 🌟 Ensure content starts below the navbar */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  padding-top: 100px; /* Pushes content below the navbar */
+}
+
+/* 📌 Sidebar Filters */
+aside {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+aside:hover {
+  transform: scale(1.02);
+}
+
+/* 🏷️ Filter Headings */
+aside h5,
+aside h6 {
+  color: #000428;
+  font-weight: bold;
+}
+
+/* 📌 Filter Options */
+.filter-checkbox {
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-checkbox:hover {
+  transform: scale(1.1);
+}
+
+/* 📌 Price Range Styling */
+#priceRange {
+  width: 100%;
+  cursor: pointer;
+}
+
+#priceValue {
+  font-weight: bold;
+  color: #004e92;
+}
+
+/* 🌟 Ensuring the Product Grid is Styled */
+.product-item {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 20px;
+}
+
+.product-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 📱 Responsive Adjustments */
+@media (max-width: 768px) {
+  aside {
+    margin-bottom: 20px;
+  }
+}
+/* 🌟 Sidebar Filters */
+aside {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+aside:hover {
+  transform: scale(1.02);
+}
+
+/* 🏷️ Filter Headings */
+aside h5,
+aside h6 {
+  color: #000428;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* 📌 Filter Options */
+.filter-checkbox,
+.filter-size,
+.filter-color,
+.filter-type {
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-checkbox:hover,
+.filter-size:hover,
+.filter-color:hover,
+.filter-type:hover {
+  transform: scale(1.1);
+}
+
+/* 🎨 Color Options */
+.color-option {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 5px;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.color-option:hover,
+.color-option.active {
+  border: 2px solid #000;
+}
+
+/* 📌 Size Options */
+.size-option {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: 0.3s;
+}
+
+.size-option:hover,
+.size-option.active {
+  border-color: #004e92;
+  background-color: #004e92;
+  color: white;
+}
+
+/* 📌 Price Range Styling */
+#priceRange {
+  width: 100%;
+  cursor: pointer;
+}
+
+#priceValue {
+  font-weight: bold;
+  color: #004e92;
+}
+
+/* 📱 Responsive Adjustments */
+@media (max-width: 768px) {
+  aside {
+    margin-bottom: 20px;
+  }
+}
+/* Clear Filters Button */
+#clearFilters {
+  background-color: #dc3545;
+  color: white;
+  font-weight: bold;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+#clearFilters:hover {
+  background-color: #b02a37;
+}
+/* Size Options */
+.size-options {
+  margin: 10px 0;
+}
+
+.size-option {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: 0.3s;
+}
+
+.size-option:hover,
+.size-option.active {
+  border-color: #004e92;
+  background-color: #004e92;
+  color: white;
+}
+
+/* Color Options */
+.color-options {
+  margin: 10px 0;
+}
+
+.color-option {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 5px;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.color-option:hover,
+.color-option.active {
+  border: 2px solid #000;
+}
+
+.product-item {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 20px;
+}
+
+.product-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.size-options,
+.color-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.size-option {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.size-option:hover,
+.size-option.active {
+  background-color: #004e92;
+  color: white;
+}
+
+.color-option {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 2px solid transparent;
+}
+
+.color-option:hover,
+.color-option.active {
+  border-color: #000;
+}
+/* ✅ General Styling */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* ✅ Container Styling */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* ✅ Product Image Section */
+#productImage {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+#productImage:hover {
+  transform: scale(1.05);
+}
+
+/* ✅ Product Details */
+#productName {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+#productPrice {
+  font-size: 22px;
+  font-weight: bold;
+  color: #28a745;
+  margin-bottom: 15px;
+}
+
+#productDescription {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* ✅ Size Options */
+.size-option {
+  display: inline-block;
+  padding: 8px 15px;
+  margin: 5px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.size-option:hover {
+  background: #007bff;
+  color: white;
+}
+
+/* ✅ Color Options */
+.color-option {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #ddd;
+  transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.color-option:hover {
+  transform: scale(1.2);
+  border-color: #007bff;
+}
+
+/* ✅ Add to Cart Button */
+.btn-primary {
+  background: #007bff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+}
+

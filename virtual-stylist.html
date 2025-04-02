@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Stylist - Clan India Lifestyle</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ai-features.css">
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary py-3 fixed-top">
+        <div class="container-fluid">
+            <!-- Left Side: Logo & Brand Name -->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/Logo/logo.jpg" width="130" height="100" alt="Logo">
+                <span class="ms-2 fw-bold">Clan India Lifestyle</span>
+            </a>
+
+            <!-- Hamburger Button (for mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Right Side: Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <!-- AI Features Navigation -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-robot me-1"></i> AI Features
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="ai-assistant.html">AI Shopping Assistant</a></li>
+                            <li><a class="dropdown-item active" href="virtual-stylist.html">Virtual Stylist</a></li>
+                            <li><a class="dropdown-item" href="personalized-recommendations.html">Personalized Recommendations</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <!-- Search Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </li>
+                    <!-- Shopping Cart Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="shoppingcart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                    </li>
+                    <!-- Account Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- VIRTUAL STYLIST MAIN CONTENT -->
+    <div class="container virtual-stylist-container mt-5 pt-5">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h1 class="stylist-title"><i class="fas fa-tshirt me-2"></i>Virtual Stylist</h1>
+                <p class="stylist-subtitle">Get personalized outfit recommendations based on your style preferences</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Left Column: Style Profile -->
+            <div class="col-lg-4 mb-4">
+                <div class="style-profile-container">
+                    <h3>Your Style Profile</h3>
+                    <form id="styleProfileForm">
+                        <div class="mb-3">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select class="form-select" id="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="unisex">Unisex</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="bodyType" class="form-label">Body Type</label>
+                            <select class="form-select" id="bodyType">
+                                <option value="athletic">Athletic</option>
+                                <option value="slim">Slim</option>
+                                <option value="regular">Regular</option>
+                                <option value="plus">Plus Size</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="occasion" class="form-label">Occasion</label>
+                            <select class="form-select" id="occasion">
+                                <option value="casual">Casual</option>
+                                <option value="workout">Workout/Gym</option>
+                                <option value="athleisure">Athleisure</option>
+                                <option value="sports">Sports</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Style Preferences</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="preferMinimal" checked>
+                                <label class="form-check-label" for="preferMinimal">Minimal</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="preferBold">
+                                <label class="form-check-label" for="preferBold">Bold Colors</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="preferTrendy">
+                                <label class="form-check-label" for="preferTrendy">Trendy</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="preferClassic">
+                                <label class="form-check-label" for="preferClassic">Classic</label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Color Preferences</label>
+                            <div class="color-preference-grid">
+                                <div class="color-option" style="background-color: #000000;" data-color="black"></div>
+                                <div class="color-option" style="background-color: #FFFFFF; border: 1px solid #ddd;" data-color="white"></div>
+                                <div class="color-option" style="background-color: #0000FF;" data-color="blue"></div>
+                                <div class="color-option" style="background-color: #FF0000;" data-color="red"></div>
+                                <div class="color-option" style="background-color: #00FF00;" data-color="green"></div>
+                                <div class="color-option" style="background-color: #808080;" data-color="gray"></div>
+                                <div class="color-option" style="background-color: #FFA500;" data-color="orange"></div>
+                                <div class="color-option" style="background-color: #800080;" data-color="purple"></div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="updateStyleProfile" class="btn btn-primary w-100">Update Recommendations</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Right Column: Outfit Recommendations -->
+            <div class="col-lg-8">
+                <div class="outfit-recommendations-container">
+                    <div class="outfit-controls">
+                        <h3>Your Outfit Recommendations</h3>
+                        <div class="outfit-filters">
+                            <select class="form-select" id="outfitSortBy">
+                                <option value="relevance">Sort by: Relevance</option>
+                                <option value="price-low">Sort by: Price (Low to High)</option>
+                                <option value="price-high">Sort by: Price (High to Low)</option>
+                                <option value="newest">Sort by: Newest</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="outfits-grid" id="outfitsGrid">
+                        <!-- Outfit cards will be populated here -->
+                        <div class="outfit-loading">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p>Generating outfit recommendations...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Outfit Detail Modal -->
+    <div class="modal fade" id="outfitDetailModal" tabindex="-1" aria-labelledby="outfitDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="outfitDetailModalLabel">Outfit Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="outfit-detail-image">
+                                <img src="/placeholder.svg" id="outfitDetailImage" alt="Outfit" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 id="outfitDetailName"></h4>
+                            <p id="outfitDetailDescription" class="text-muted"></p>
+                            
+                            <h5 class="mt-4">Included Items</h5>
+                            <div id="outfitDetailItems" class="outfit-items-list">
+                                <!-- Items will be populated here -->
+                            </div>
+                            
+                            <div class="outfit-detail-price mt-4">
+                                <h5>Total Price</h5>
+                                <p id="outfitDetailPrice" class="price"></p>
+                            </div>
+                            
+                            <div class="outfit-detail-actions mt-4">
+                                <button class="btn btn-primary btn-lg me-2">Add All to Cart</button>
+                                <button class="btn btn-outline-primary btn-lg">Save Outfit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer bg-light text-dark mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <!-- Contact Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Contact Information</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Head Office:</strong></p>
+                    <p>C-3, Sector 8, Noida, Uttar Pradesh - 201301</p>
+                </div>
+    
+                <!-- Policy Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Policy Information</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> Payment Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Privacy Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Return & Refund Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Shipping Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Terms and Conditions</li>
+                    </ul>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> Home</li>
+                        <li><i class="fas fa-check text-primary"></i> My Account</li>
+                        <li><i class="fas fa-check text-primary"></i> My Orders</li>
+                        <li><i class="fas fa-check text-primary"></i> About Us</li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Social Media & Payment Icons -->
+            <div class="row mt-4 text-center">
+                <div class="col-md-12">
+                    <!-- Social Media Icons -->
+                    <a href="#" class="mx-2"><i class="fab fa-facebook fa-2x text-primary"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-pinterest fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-instagram fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-linkedin fa-2x text-primary"></i></a>
+                </div>
+    
+                <!-- Payment Methods -->
+                <div class="col-md-12 mt-3">
+                    <img src="img/payments/visa.png" alt="Visa" width="50">
+                    <img src="img/payments/mastercard.png" alt="MasterCard" width="50">
+                    <img src="img/payments/upi.png" alt="UPI" width="50">
+                    <img src="img/payments/wallet.png" alt="Wallet" width="50">
+                </div>
+            </div>
+        </div>
+    
+        <!-- Copyright -->
+        <div class="text-center py-3 bg-secondary text-white">
+            Copyright © by Clan India Lifestyle 2025. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Floating AI Assistant Button -->
+    <div class="floating-ai-button" id="floatingAiButton">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="ai-features.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Virtual Stylist
+            initVirtualStylist();
+            
+            // Setup floating button
+            document.getElementById('floatingAiButton').addEventListener('click', function() {
+                window.location.href = 'ai-assistant.html';
+            });
+        });
+    </script>
+</body>
+</html>
+

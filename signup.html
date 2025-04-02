@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Clan India Lifestyle</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container {
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-logo img {
+            max-width: 150px;
+        }
+        
+        .auth-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+        
+        .form-floating {
+            margin-bottom: 20px;
+        }
+        
+        .auth-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 10px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .facebook {
+            background-color: #3b5998;
+        }
+        
+        .google {
+            background-color: #db4437;
+        }
+        
+        .twitter {
+            background-color: #1da1f2;
+        }
+        
+        .password-strength {
+            height: 5px;
+            margin-top: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .password-feedback {
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary py-3 fixed-top">
+        <div class="container-fluid">
+            <!-- Left Side: Logo & Brand Name -->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/Logo/logo.jpg" width="130" height="100" alt="Logo">
+                <span class="ms-2 fw-bold">Clan India Lifestyle</span>
+            </a>
+
+            <!-- Hamburger Button (for mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Right Side: Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <!-- AI Features Navigation -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-robot me-1"></i> AI Features
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="ai-assistant.html">AI Shopping Assistant</a></li>
+                            <li><a class="dropdown-item" href="virtual-stylist.html">Virtual Stylist</a></li>
+                            <li><a class="dropdown-item" href="personalized-recommendations.html">Personalized Recommendations</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <!-- Search Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </li>
+                    <!-- Shopping Cart Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="shoppingcart.html">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span id="cartCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; display: none;">0</span>
+                        </a>
+                    </li>
+                    <!-- Account Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="login.html">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container mt-5 pt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="auth-container">
+                    <div class="auth-logo">
+                        <img src="img/Logo/logo.jpg" alt="Clan India Lifestyle">
+                    </div>
+                    
+                    <h2 class="auth-title">Create an Account</h2>
+                    
+                    <!-- Alert for messages -->
+                    <div class="alert alert-danger" id="signupError" style="display: none;"></div>
+                    <div class="alert alert-success" id="signupSuccess" style="display: none;"></div>
+                    
+                    <form id="signupForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                                    <label for="firstName">First Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                                    <label for="lastName">Last Name</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                            <label for="email">Email address</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control" id="phone" placeholder="Phone Number" required>
+                            <label for="phone">Phone Number</label>
+                        </div>
+                        
+                        <div class="form-floating mb-2">
+                            <input type="password" class="form-control" id="password" placeholder="Password" required>
+                            <label for="password">Password</label>
+                        </div>
+                        
+                        <div class="password-strength" id="passwordStrength"></div>
+                        <div class="password-feedback text-muted" id="passwordFeedback">Password must be at least 8 characters</div>
+                        
+                        <div class="form-floating mb-3 mt-3">
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
+                            <label for="confirmPassword">Confirm Password</label>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="termsAgreed" required>
+                            <label class="form-check-label" for="termsAgreed">
+                                I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100 py-2">Create Account</button>
+                        
+                        <div class="auth-links">
+                            <span>Already have an account? <a href="login.html">Login</a></span>
+                        </div>
+                    </form>
+                    
+                    <div class="social-login">
+                        <p class="text-muted">Or sign up with</p>
+                        <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn google"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer bg-light text-dark mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <!-- Contact Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Contact Information</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Head Office:</strong></p>
+                    <p>C-3, Sector 8, Noida, Uttar Pradesh - 201301</p>
+                </div>
+    
+                <!-- Policy Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Policy Information</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> Payment Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Privacy Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Return & Refund Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Shipping Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Terms and Conditions</li>
+                    </ul>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> Home</li>
+                        <li><i class="fas fa-check text-primary"></i> My Account</li>
+                        <li><i class="fas fa-check text-primary"></i> My Orders</li>
+                        <li><i class="fas fa-check text-primary"></i> About Us</li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Social Media & Payment Icons -->
+            <div class="row mt-4 text-center">
+                <div class="col-md-12">
+                    <!-- Social Media Icons -->
+                    <a href="#" class="mx-2"><i class="fab fa-facebook fa-2x text-primary"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-pinterest fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-instagram fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-linkedin fa-2x text-primary"></i></a>
+                </div>
+    
+                <!-- Payment Methods -->
+                <div class="col-md-12 mt-3">
+                    <img src="img/payments/visa.png" alt="Visa" width="50">
+                    <img src="img/payments/mastercard.png" alt="MasterCard" width="50">
+                    <img src="img/payments/upi.png" alt="UPI" width="50">
+                    <img src="img/payments/wallet.png" alt="Wallet" width="50">
+                </div>
+            </div>
+        </div>
+    
+        <!-- Copyright -->
+        <div class="text-center py-3 bg-secondary text-white">
+            Copyright © by Clan India Lifestyle 2025. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="cart.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update cart count
+            if (typeof updateCartCount === 'function') {
+                updateCartCount();
+            }
+            
+            // Check if user is already logged in
+            if (isLoggedIn()) {
+                // Redirect to account page or show message
+                document.getElementById('signupSuccess').textContent = 'You are already logged in!';
+                document.getElementById('signupSuccess').style.display = 'block';
+                
+                // Redirect after a short delay
+                setTimeout(function() {
+                    window.location.href = 'account.html';
+                }, 2000);
+            }
+            
+            // Password strength meter
+            const passwordInput = document.getElementById('password');
+            const passwordStrength = document.getElementById('passwordStrength');
+            const passwordFeedback = document.getElementById('passwordFeedback');
+            
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                const strength = checkPasswordStrength(password);
+                
+                // Update strength meter
+                passwordStrength.style.width = '100%';
+                
+                if (password.length === 0) {
+                    passwordStrength.style.backgroundColor = '#e9ecef';
+                    passwordFeedback.textContent = 'Password must be at least 8 characters';
+                } else if (strength === 'weak') {
+                    passwordStrength.style.backgroundColor = '#dc3545';
+                    passwordFeedback.textContent = 'Weak password - try adding numbers and special characters';
+                } else if (strength === 'medium') {
+                    passwordStrength.style.backgroundColor = '#ffc107';
+                    passwordFeedback.textContent = 'Medium strength - try adding special characters';
+                } else {
+                    passwordStrength.style.backgroundColor = '#28a745';
+                    passwordFeedback.textContent = 'Strong password';
+                }
+            });
+            
+            // Handle signup form submission
+            document.getElementById('signupForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const termsAgreed = document.getElementById('termsAgreed').checked;
+                
+                // Validate passwords match
+                if (password !== confirmPassword) {
+                    document.getElementById('signupError').textContent = 'Passwords do not match';
+                    document.getElementById('signupError').style.display = 'block';
+                    return;
+                }
+                
+                // Validate password strength
+                if (checkPasswordStrength(password) === 'weak') {
+                    document.getElementById('signupError').textContent = 'Password is too weak. Please use a stronger password.';
+                    document.getElementById('signupError').style.display = 'block';
+                    return;
+                }
+                
+                // Create user account
+                const signupResult = register({
+                    firstName,
+                    lastName,
+                    email,
+                    phone,
+                    password
+                });
+                
+                if (signupResult.success) {
+                    // Show success message
+                    document.getElementById('signupError').style.display = 'none';
+                    document.getElementById('signupSuccess').textContent = signupResult.message;
+                    document.getElementById('signupSuccess').style.display = 'block';
+                    
+                    // Redirect to login page after a delay
+                    setTimeout(function() {
+                        window.location.href = 'login.html';
+                    }, 2000);
+                } else {
+                    // Show error message
+                    document.getElementById('signupError').textContent = signupResult.message;
+                    document.getElementById('signupError').style.display = 'block';
+                }
+            });
+            
+            // Helper function to check password strength
+            function checkPasswordStrength(password) {
+                // Password should be at least 8 characters
+                if (password.length < 8) {
+                    return 'weak';
+                }
+                
+                // Check for complexity
+                const hasUpperCase = /[A-Z]/.test(password);
+                const hasLowerCase = /[a-z]/.test(password);
+                const hasNumbers = /\d/.test(password);
+                const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+                
+                const complexity = [hasUpperCase, hasLowerCase, hasNumbers, hasSpecialChars].filter(Boolean).length;
+                
+                if (complexity <= 2) {
+                    return 'weak';
+                } else if (complexity === 3) {
+                    return 'medium';
+                } else {
+                    return 'strong';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

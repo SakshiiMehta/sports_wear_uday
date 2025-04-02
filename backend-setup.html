@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Setup Guide | Clan India Lifestyle</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+        }
+        
+        h1, h2, h3, h4 {
+            color: #007bff;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        code {
+            color: #d63384;
+        }
+        
+        .step {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Backend Setup Guide for Clan India Lifestyle</h1>
+        
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i> This guide provides step-by-step instructions for setting up the backend for the Clan India Lifestyle e-commerce website.
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">1</span> Project Setup</h2>
+            
+            <p>First, create a new directory for your backend and initialize a Node.js project:</p>
+            
+            <pre><code>mkdir clan-india-backend
+cd clan-india-backend
+npm init -y</code></pre>
+            
+            <p>Install the necessary dependencies:</p>
+            
+            <pre><code>npm install express mongoose dotenv bcrypt jsonwebtoken cors multer razorpay</code></pre>
+            
+            <p>Create a development dependency for nodemon (for auto-restarting the server during development):</p>
+            
+            <pre><code>npm install --save-dev nodemon</code></pre>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">2</span> Project Structure</h2>
+            
+            <p>Create the following directory structure:</p>
+            
+            <pre><code>clan-india-backend/
+├── config/
+│   └── db.js
+├── controllers/
+│   ├── authController.js
+│   ├── productController.js
+│   ├── cartController.js
+│   ├── orderController.js
+│   └── paymentController.js
+├── middleware/
+│   ├── auth.js
+│   └── upload.js
+├── models/
+│   ├── User.js
+│   ├── Product.js
+│   ├── Cart.js
+│   └── Order.js
+├── routes/
+│   ├── auth.js
+│   ├── products.js
+│   ├── cart.js
+│   ├── orders.js
+│   └── payments.js
+├── uploads/
+├── .env
+├── .gitignore
+├── package.json
+└── server.js</code></pre>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">3</span> Environment Setup</h2>
+            
+            <p>Create a <code>.env</code> file in the root directory with the following variables:</p>
+            
+            <pre><code>PORT=5000
+MONGODB_URI=mongodb+srv://your_username:your_password@cluster0.mongodb.net/clan_india
+JWT_SECRET=your_jwt_secret_key
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret</code></pre>
+            
+            <p>Create a <code>.gitignore</code> file to exclude sensitive files from version control:</p>
+            
+            <pre><code>node_modules/
+.env
+uploads/*
+!uploads/.gitkeep</code></pre>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">4</span> Database Connection</h2>
+            
+            <p>Create the database connection file at <code>config/db.js</code>:</p>
+            
+            <pre><code>const mongoose = require('mongoose');
+
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.error(`Error: ${error.message}`);
+        process.exit(1);
+    }
+};
+
+module.exports = connectDB;</code></pre>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">5</span> Models</h2>
+            
+            <p>Create the User model at <code>models/User.js</code>:</p>
+            
+            <pre><code>const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
+const userSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    addresses: [
+        {
+            name: String,
+            phone: String,
+            line1: String,
+            line2: String,
+            city: String,
+            state: String,
+            pincode: String,
+            type: String,
+            isDefault: Boolean
+        }
+    ],
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+// Hash password before saving
+userSchema.pre('save', async function(next) {
+    if (!this.isModified('password')) {
+        return next();
+    }
+    
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+});
+
+// Method to compare passwords
+userSchema.methods.matchPassword = async function(enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+};
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;</code></pre>
+            
+            <p>Create the Product model at <code>models/Product.js</code>:</p>
+            
+            <pre><code>const mongoose = require('mongoose');
+
+const productSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    originalPrice: {
+        type: Number,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    category: {
+        type: String,
+        required: true
+    },
+    subcategory: {
+        type: String,
+        required: true
+    },
+    sizes: {
+        type: [String],
+        required: true
+    },
+    colors: {
+        type: [String],
+        required: true
+    },
+    inStock: {
+        type: Boolean,
+        default: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const Product = mongoose.model('Product', productSchema);
+
+module.exports = Product;</code></pre>
+            
+            <p>Create the Cart model at <code>models/Cart.js</code>:</p>
+            
+            <pre><code>const mongoose = require('mongoose');
+
+const cartSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    items: [
+        {
+            product: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product',
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true,
+                default: 1
+            },
+            size: {
+                type: String,
+                required: true
+            },
+            color: {
+                type: String,
+                required: true
+            }
+        }
+    ],
+    updatedAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const Cart = mongoose.model('Cart', cartSchema);
+
+module.exports = Cart;</code></pre>
+            
+            <p>Create the Order model at <code>models/Order.js</code>:</p>
+            
+            <pre><code>const mongoose = require('mongoose');
+
+const orderSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    items: [
+        {
+            product: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product',
+                required: true
+            },
+            name: {
+                type: String,
+                required: true
+            },
+            price: {
+                type: Number,
+                required: true
+            },
+            image: {
+                type: String,
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true
+            },
+            size: {
+                type: String,
+                required: true
+            },
+            color: {
+                type: String,
+                required: true
+            }
+        }
+    ],
+    shippingAddress: {
+        name: String,
+        phone: String,
+        line1: String,
+        line2: String,
+        city: String,
+        state: String,
+        pincode: String
+    },
+    paymentMethod: {
+        type: String,
+        required: true
+    },
+    paymentResult: {
+        id: String,
+        status: String,
+        update_time: String,
+        email_address: String
+    },
+    subtotal: {
+        type: Number,
+        required: true
+    },
+    shippingPrice: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    total: {
+        type: Number,
+        required: true
+    },
+    isPaid: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    paidAt: {
+        type: Date
+    },
+    isDelivered: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    deliveredAt: {
+        type: Date
+    },
+    status: {
+        type: String,
+        required: true,
+        default: 'Pending'
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const Order = mongoose.model('Order', orderSchema);
+
+module.exports = Order;</code></pre>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">6</span> Middleware</h2>
+            
+            <p>Create the authentication middleware at <code>middleware/auth.js</code>:</p>
+            
+            <pre><code>const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+
+const protect = async (req, res, next) => {
+    let token;
+    
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        try {
+            // Get token from header
+            token = req.headers.authorization.split(' ')[1];
+            
+            // Verify token
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            
+            // Get user from the token
+            req.user = await User.findById(decoded.id).select('-password');
+            
+            next();
+        } catch (error) {
+            console.error(error);
+            res.status(401).json({ message: 'Not authorized, token failed' });
+        }
+    }
+    
+    if (!token) {
+        res.status(401).json({ message: 'Not authorized, no token' });
+    }
+};
+
+module.exports = { protect };</code></pre>
+            
+            <p>Create the file upload middleware at <code>middleware/upload.js</code>:</p>
+            
+            <pre><code>const multer = require('multer');
+const path = require('path');
+
+// Set storage engine
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
+});
+
+// Check file type
+function checkFileType(file, cb) {
+    // Allowed extensions
+    const filetypes = /jpeg|jpg|png|gif/;
+    // Check extension
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    // Check mime type
+    const mimetype = filetypes.test(file.mimetype);
+    
+    if (mimetype && extname) {
+        return cb(null, true);
+    } else {
+        cb('Error: Images Only!');
+    }
+}
+
+// Initialize upload
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 1000000 }, // 1MB
+    fileFilter: function(req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
+
+module.exports = upload;</code></pre>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">7</span> Controllers</h2>
+            
+            <p>Create the authentication controller at <code>controllers/authController.js</code>:</p>
+            
+            <pre><code>const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+
+// Generate JWT
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: '30d'
+    });
+};
+
+// @desc    Register a new user
+// @route   POST /api/auth/register
+// @access  Public
+const registerUser = async (req, res) => {
+    try {
+        const { firstName, lastName, email, phone, password } = req.body;
+        
+        // Check if user already exists
+        const userExists = await User.findOne({ email });
+        
+        if (userExists) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
+        
+        // Create user
+        const user = await User.create({
+            firstName,
+            lastName,
+            email,
+            phone,
+            password
+        });
+        
+        if (user) {
+            res.status(201).json({
+                _id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                phone: user.phone,
+                token: generateToken(user._id)
+            });
+        } else {
+            res.status(400).json({ message: 'Invalid user data' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Auth user & get token
+// @route   POST /api/auth/login
+// @access  Public
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        
+        // Find user by email
+        const user = await User.findOne({ email });
+        
+        // Check if user exists and password matches
+        if (user && (await user.matchPassword(password))) {
+            res.json({
+                _id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                phone: user.phone,
+                token: generateToken(user._id)
+            });
+        } else {
+            res.status(401).json({ message: 'Invalid email or password' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Get user profile
+// @route   GET /api/auth/profile
+// @access  Private
+const getUserProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).select('-password');
+        
+        if (user) {
+            res.json(user);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Update user profile
+// @route   PUT /api/auth/profile
+// @access  Private
+const updateUserProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        
+        if (user) {
+            user.firstName = req.body.firstName || user.firstName;
+            user.lastName = req.body.lastName || user.lastName;
+            user.phone = req.body.phone || user.phone;
+            
+            if (req.body.email && req.body.email !== user.email) {
+                // Check if email is already in use
+                const emailExists = await User.findOne({ email: req.body.email });
+                
+                if (emailExists) {
+                    return res.status(400).json({ message: 'Email already in use' });
+                }
+                
+                user.email = req.body.email;
+            }
+            
+            if (req.body.password) {
+                user.password = req.body.password;
+            }
+            
+            const updatedUser = await user.save();
+            
+            res.json({
+                _id: updatedUser._id,
+                firstName: updatedUser.firstName,
+                lastName: updatedUser.lastName,
+                email: updatedUser.email,
+                phone: updatedUser.phone,
+                token: generateToken(updatedUser._id)
+            });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Add user address
+// @route   POST /api/auth/address
+// @access  Private
+const addUserAddress = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        
+        if (user) {
+            const newAddress = {
+                name: req.body.name,
+                phone: req.body.phone,
+                line1: req.body.line1,
+                line2: req.body.line2,
+                city: req.body.city,
+                state: req.body.state,
+                pincode: req.body.pincode,
+                type: req.body.type,
+                isDefault: req.body.isDefault
+            };
+            
+            // If this is set as default, unset default for all other addresses
+            if (newAddress.isDefault) {
+                user.addresses.forEach(addr => {
+                    addr.isDefault = false;
+                });
+            }
+            
+            user.addresses.push(newAddress);
+            
+            const updatedUser = await user.save();
+            
+            res.status(201).json(updatedUser.addresses);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+module.exports = {
+    registerUser,
+    loginUser,
+    getUserProfile,
+    updateUserProfile,
+    addUserAddress
+};</code></pre>
+            
+            <p>Create the product controller at <code>controllers/productController.js</code>:</p>
+            
+            <pre><code>const Product = require('../models/Product');
+
+// @desc    Fetch all products
+// @route   GET /api/products
+// @access  Public
+const getProducts = async (req, res) => {
+    try {
+        const { category, subcategory, search } = req.query;
+        
+        // Build filter object
+        const filter = {};
+        
+        if (category) {
+            filter.category = category;
+        }
+        
+        if (subcategory) {
+            filter.subcategory = subcategory;
+        }
+        
+        if (search) {
+            filter.name = { $regex: search, $options: 'i' };
+        }
+        
+        const products = await Product.find(filter);
+        
+        res.json(products);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Fetch single product
+// @route   GET /api/products/:id
+// @access  Public
+const getProductById = async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        
+        if (product) {
+            res.json(product);
+        } else {
+            res.status(404).json({ message: 'Product not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Create a product
+// @route   POST /api/products
+// @access  Private/Admin
+const createProduct = async (req, res) => {
+    try {
+        const { name, price, originalPrice, description, category, subcategory, sizes, colors } = req.body;
+        
+        // Get image path
+        const image = req.file ? `/uploads/${req.file.filename}` : '';
+        
+        const product = new Product({
+            name,
+            price,
+            originalPrice,
+            description,
+            image,
+            category,
+            subcategory,
+            sizes: sizes.split(','),
+            colors: colors.split(',')
+        });
+        
+        const createdProduct = await product.save();
+        
+        res.status(201).json(createdProduct);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+module.exports = {
+    getProducts,
+    getProductById,
+    createProduct
+};</code></pre>
+            
+            <p>Create the cart controller at <code>controllers/cartController.js</code>:</p>
+            
+            <pre><code>const Cart = require('../models/Cart');
+const Product = require('../models/Product');
+
+// @desc    Get user cart
+// @route   GET /api/cart
+// @access  Private
+const getCart = async (req, res) => {
+    try {
+        let cart = await Cart.findOne({ user: req.user._id }).populate('items.product');
+        
+        if (!cart) {
+            // Create empty cart if it doesn't exist
+            cart = await Cart.create({
+                user: req.user._id,
+                items: []
+            });
+        }
+        
+        res.json(cart);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Add item to cart
+// @route   POST /api/cart
+// @access  Private
+const addToCart = async (req, res) => {
+    try {
+        const { productId, quantity, size, color } = req.body;
+        
+        // Validate product
+        const product = await Product.findById(productId);
+        
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        
+        // Find user's cart
+        let cart = await Cart.findOne({ user: req.user._id });
+        
+        if (!cart) {
+            // Create new cart if it doesn't exist
+            cart = new Cart({
+                user: req.user._id,
+                items: []
+            });
+        }
+        
+        // Check if item already exists in cart
+        const itemIndex = cart.items.findIndex(item => 
+            item.product.toString() === productId && 
+            item.size === size && 
+            item.color === color
+        );
+        
+        if (itemIndex > -1) {
+            // Update quantity if item exists
+            cart.items[itemIndex].quantity += quantity;
+        } else {
+            // Add new item
+            cart.items.push({
+                product: productId,
+                quantity,
+                size,
+                color
+            });
+        }
+        
+        // Update cart
+        cart.updatedAt = Date.now();
+        await cart.save();
+        
+        // Return updated cart
+        const updatedCart = await Cart.findById(cart._id).populate('items.product');
+        
+        res.status(201).json(updatedCart);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Update cart item quantity
+// @route   PUT /api/cart/:itemId
+// @access  Private
+const updateCartItem = async (req, res) => {
+    try {
+        const { quantity } = req.body;
+        const { itemId } = req.params;
+        
+        // Find user's cart
+        const cart = await Cart.findOne({ user: req.user._id });
+        
+        if (!cart) {
+            return res.status(404).json({ message: 'Cart not found' });
+        }
+        
+        // Find item in cart
+        const itemIndex = cart.items.findIndex(item => item._id.toString() === itemId);
+        
+        if (itemIndex === -1) {
+            return res.status(404).json({ message: 'Item not found in cart' });
+        }
+        
+        // Update quantity
+        cart.items[itemIndex].quantity = quantity;
+        
+        // Remove item if quantity is 0
+        if (quantity <= 0) {
+            cart.items.splice(itemIndex, 1);
+        }
+        
+        // Update cart
+        cart.updatedAt = Date.now();
+        await cart.save();
+        
+        // Return updated cart
+        const updatedCart = await Cart.findById(cart._id).populate('items.product');
+        
+        res.json(updatedCart);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Remove item from cart
+// @route   DELETE /api/cart/:itemId
+// @access  Private
+const removeCartItem = async (req, res) => {
+    try {
+        const { itemId } = req.params;
+        
+        // Find user's cart
+        const cart = await Cart.findOne({ user: req.user._id });
+        
+        if (!cart) {
+            return res.status(404).json({ message: 'Cart not found' });
+        }
+        
+        // Remove item from cart
+        cart.items = cart.items.filter(item => item._id.toString() !== itemId);
+        
+        // Update cart
+        cart.updatedAt = Date.now();
+        await cart.save();
+        
+        // Return updated cart
+        const updatedCart = await Cart.findById(cart._id).populate('items.product');
+        
+        res.json(updatedCart);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+module.exports = {
+    getCart,
+    addToCart,
+    updateCartItem,
+    removeCartItem
+};</code></pre>
+            
+            <p>Create the order controller at <code>controllers/orderController.js</code>:</p>
+            
+            <pre><code>const Order = require('../models/Order');
+const Cart = require('../models/Cart');
+const Product = require('../models/Product');
+
+// @desc    Create new order
+// @route   POST /api/orders
+// @access  Private
+const createOrder = async (req, res) => {
+    try {
+        const { shippingAddress, paymentMethod } = req.body;
+        
+        // Get user's cart
+        const cart = await Cart.findOne({ user: req.user._id }).populate('items.product');
+        
+        if (!cart || cart.items.length === 0) {
+            return res.status(400).json({ message: 'No items in cart' });
+        }
+        
+        // Calculate prices
+        const subtotal = cart.items.reduce((acc, item) => {
+            return acc + (item.product.price * item.quantity);
+        }, 0);
+        
+        // Free shipping for orders over ₹999
+        const shippingPrice = subtotal >= 999 ? 0 : 99;
+        
+        const total = subtotal + shippingPrice;
+        
+        // Create order items
+        const orderItems = cart.items.map(item => {
+            return {
+                product: item.product._id,
+                name: item.product.name,
+                price: item.product.price,
+                image: item.product.image,
+                quantity: item.quantity,
+                size: item.size,
+                color: item.color
+            };
+        });
+        
+        // Create order
+        const order = new Order({
+            user: req.user._id,
+            items: orderItems,
+            shippingAddress,
+            paymentMethod,
+            subtotal,
+            shippingPrice,
+            total
+        });
+        
+        // Set payment status for COD orders
+        if (paymentMethod === 'cod') {
+            order.status = 'Processing';
+        }
+        
+        const createdOrder = await order.save();
+        
+        // Clear cart after order is created
+        cart.items = [];
+        await cart.save();
+        
+        res.status(201).json(createdOrder);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Get order by ID
+// @route   GET /api/orders/:id
+// @access  Private
+const getOrderById = async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+        
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+        
+        // Check if order belongs to user
+        if (order.user.toString() !== req.user._id.toString()) {
+            return res.status(401).json({ message: 'Not authorized' });
+        }
+        
+        res.json(order);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Get logged in user orders
+// @route   GET /api/orders
+// @access  Private
+const getUserOrders = async (req, res) => {
+    try {
+        const orders = await Order.find({ user: req.user._id }).sort('-createdAt');
+        
+        res.json(orders);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Update order to paid
+// @route   PUT /api/orders/:id/pay
+// @access  Private
+const updateOrderToPaid = async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+        
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+        
+        // Update order
+        order.isPaid = true;
+        order.paidAt = Date.now();
+        order.status = 'Processing';
+        order.paymentResult = {
+            id: req.body.id,
+            status: req.body.status,
+            update_time: req.body.update_time,
+            email_address: req.body.payer.email_address
+        };
+        
+        const updatedOrder = await order.save();
+        
+        res.json(updatedOrder);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+module.exports = {
+    createOrder,
+    getOrderById,
+    getUserOrders,
+    updateOrderToPaid
+};</code></pre>
+            
+            <p>Create the payment controller at <code>controllers/paymentController.js</code>:</p>
+            
+            <pre><code>const Razorpay = require('razorpay');
+const Order = require('../models/Order');
+
+// Initialize Razorpay
+const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
+});
+
+// @desc    Create Razorpay order
+// @route   POST /api/payments/razorpay
+// @access  Private
+const createRazorpayOrder = async (req, res) => {
+    try {
+        const { orderId } = req.body;
+        
+        // Get order from database
+        const order = await Order.findById(orderId);
+        
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+        
+        // Check if order belongs to user
+        if (order.user.toString() !== req.user._id.toString()) {
+            return res.status(401).json({ message: 'Not authorized' });
+        }
+        
+        // Create Razorpay order
+        const payment_capture = 1;
+        const amount = order.total * 100; // Convert to paise
+        const currency = 'INR';
+        
+        const options = {
+            amount,
+            currency,
+            receipt: orderId,
+            payment_capture
+        };
+        
+        const response = await razorpay.orders.create(options);
+        
+        res.json({
+            id: response.id,
+            amount: response.amount,
+            currency: response.currency
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+// @desc    Verify Razorpay payment
+// @route   POST /api/payments/razorpay/verify
+// @access  Private
+const verifyRazorpayPayment = async (req, res) => {
+    try {
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, orderId } = req.body;
+        
+        // Get order from database
+        const order = await Order.findById(orderId);
+        
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+        
+        // Verify signature
+        const crypto = require('crypto');
+        const generated_signature = crypto.createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+            .update(razorpay_order_id + '|' + razorpay_payment_id)
+            .digest('hex');
+        
+        if (generated_signature === razorpay_signature) {
+            // Payment is successful
+            order.isPaid = true;
+            order.paidAt = Date.now();
+            order.status = 'Processing';
+            order.paymentResult = {
+                id: razorpay_payment_id,
+                status: 'COMPLETED',
+                update_time: Date.now(),
+                email_address: req.user.email
+            };
+            
+            const updatedOrder = await order.save();
+            
+            res.json(updatedOrder);
+        } else {
+            res.status(400).json({ message: 'Payment verification failed' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+module.exports = {
+    createRazorpayOrder,
+    verifyRazorpayPayment
+};</code></pre>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">8</span> Routes</h2>
+            
+            <p>Create the authentication routes at <code>routes/auth.js</code>:</p>
+            
+            <pre><code>const express = require('express');
+const router = express.Router();
+const { registerUser, loginUser, getUserProfile, updateUserProfile, addUserAddress } = require('../controllers/authController');
+const { protect } = require('../middleware/auth');
+
+// Public routes
+router.post('/register', registerUser);
+router.post('/login', loginUser);
+
+// Protected routes
+router.get('/profile', protect, getUserProfile);
+router.put('/profile', protect, updateUserProfile);
+router.post('/address', protect, addUserAddress);
+
+module.exports = router;</code></pre>
+            
+            <p>Create the product routes at <code>routes/products.js</code>:</p>
+            
+            <pre><code>const express = require('express');
+const router = express.Router();
+const { getProducts, getProductById, createProduct } = require('../controllers/productController');
+const { protect } = require('../middleware/auth');
+const upload = require('../middleware/upload');
+
+// Public routes
+router.get('/', getProducts);
+router.get('/:id', getProductById);
+
+// Protected routes
+router.post('/', protect, upload.single('image'), createProduct);
+
+module.exports = router;</code></pre>
+            
+            <p>Create the cart routes at <code>routes/cart.js</code>:</p>
+            
+            <pre><code>const express = require('express');
+const router = express.Router();
+const { getCart, addToCart, updateCartItem, removeCartItem } = require('../controllers/cartController');
+const { protect } = require('../middleware/auth');
+
+// Protected routes
+router.get('/', protect, getCart);
+router.post('/', protect, addToCart);
+router.put('/:itemId', protect, updateCartItem);
+router.delete('/:itemId', protect, removeCartItem);
+
+module.exports = router;</code></pre>
+            
+            <p>Create the order routes at <code>routes/orders.js</code>:</p>
+            
+            <pre><code>const express = require('express');
+const router = express.Router();
+const { createOrder, getOrderById, getUserOrders, updateOrderToPaid } = require('../controllers/orderController');
+const { protect } = require('../middleware/auth');
+
+// Protected routes
+router.post('/', protect, createOrder);
+router.get('/', protect, getUserOrders);
+router.get('/:id', protect, getOrderById);
+router.put('/:id/pay', protect, updateOrderToPaid);
+
+module.exports = router;</code></pre>
+            
+            <p>Create the payment routes at <code>routes/payments.js</code>:</p>
+            
+            <pre><code>const express = require('express');
+const router = express.Router();
+const { createRazorpayOrder, verifyRazorpayPayment } = require('../controllers/paymentController');
+const { protect } = require('../middleware/auth');
+
+// Protected routes
+router.post('/razorpay', protect, createRazorpayOrder);
+router.post('/razorpay/verify', protect, verifyRazorpayPayment);
+
+module.exports = router;</code></pre>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">9</span> Server Setup</h2>
+            
+            <p>Create the main server file at <code>server.js</code>:</p>
+            
+            <pre><code>const express = require('express');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const path = require('path');
+const connectDB = require('./config/db');
+
+// Load environment variables
+dotenv.config();
+
+// Connect to database
+connectDB();
+
+// Initialize Express
+const app = express();
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Serve static files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Routes
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/products', require('./routes/products'));
+app.use('/api/cart', require('./routes/cart'));
+app.use('/api/orders', require('./routes/orders'));
+app.use('/api/payments', require('./routes/payments'));
+
+// Serve frontend in production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend')));
+    
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../frontend', 'index.html'));
+    });
+}
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Something went wrong!' });
+});
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});</code></pre>
+        </div>
+        
+        <div class="step">
+            <h2><span class="step-number">10</span> Deployment</h2>
+            
+            <h3>MongoDB Atlas Setup</h3>
+            
+            <ol>
+                <li>Create a MongoDB Atlas account at <a href="https://www.mongodb.com/cloud/atlas" target="_blank">https://www.mongodb.com/cloud/atlas</a></li>
+                <li>Create a new cluster (the free tier is sufficient for starting)</li>
+                <li>Set up database access by creating a user with password</li>
+                <li>Set up network access by allowing access from anywhere (for development) or specific IP addresses (for production)</li>
+                <li>Get your connection string from the "Connect" button and update your <code>.env</code> file</li>
+            </ol>
+            
+            <h3>Backend Deployment (Vercel)</h3>
+            
+            <ol>
+                <li>Create a <code>vercel.json</code> file in the root directory:</li>
+            </ol>
+            
+            <pre><code>{
+    "version": 2,
+    "builds": [
+        {
+            "src": "server.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "server.js"
+        }
+    ]
+}</code></pre>
+            
+            <ol start="2">
+                <li>Install Vercel CLI: <code>npm install -g vercel</code></li>
+                <li>Login to Vercel: <code>vercel login</code></li>
+                <li>Deploy: <code>vercel</code></li>
+                <li>For production deployment: <code>vercel --prod</code></li>
+            </ol>
+            
+            <h3>Frontend Deployment</h3>
+            
+            <ol>
+                <li>Update API endpoints in your frontend code to point to your deployed backend</li>
+                <li>Deploy the frontend to Vercel or any static hosting service</li>
+            </ol>
+            
+            <h3>Connecting Frontend to Backend</h3>
+            
+            <p>Create a <code>config.js</code> file in your frontend project:</p>
+            
+            <pre><code>// config.js
+const API_URL = process.env.NODE_ENV === 'production'
+    ? 'https://your-backend-url.vercel.app/api'
+    : 'http://localhost:5000/api';
+
+export default API_URL;</code></pre>
+            
+            <p>Then use this config in your frontend API calls:</p>
+            
+            <pre><code>import API_URL from './config';
+
+// Example API call
+async function fetchProducts() {
+    try {
+        const response = await fetch(`${API_URL}/products`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        throw error;
+    }
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="mt-5 text-center">
+        <p>For any questions or issues, please contact the development team.</p>
+    </div>
+</body>
+</html>
+

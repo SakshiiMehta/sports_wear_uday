@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Clan India Lifestyle</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .checkout-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .checkout-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-title {
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .checkout-step.active .step-number {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .checkout-step.completed .step-number {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .checkout-step::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background-color: #e9ecef;
+            z-index: 1;
+        }
+        
+        .checkout-step:last-child::after {
+            display: none;
+        }
+        
+        .checkout-step.completed::after {
+            background-color: #28a745;
+        }
+        
+        .payment-method {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: #aaa;
+        }
+        
+        .payment-method.selected {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+        }
+        
+        .payment-method-header {
+            display: flex;
+            align-items: center;
+        }
+        
+        .payment-method-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            width: 40px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .step-title {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary py-3 fixed-top">
+        <div class="container-fluid">
+            <!-- Left Side: Logo & Brand Name -->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/Logo/logo.jpg" width="130" height="100" alt="Logo">
+                <span class="ms-2 fw-bold">Clan India Lifestyle</span>
+            </a>
+
+            <!-- Hamburger Button (for mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Right Side: Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <!-- AI Features Navigation -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-robot me-1"></i> AI Features
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="ai-assistant.html">AI Shopping Assistant</a></li>
+                            <li><a class="dropdown-item" href="virtual-stylist.html">Virtual Stylist</a></li>
+                            <li><a class="dropdown-item" href="personalized-recommendations.html">Personalized Recommendations</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <!-- Search Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </li>
+                    <!-- Shopping Cart Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link position-relative active" href="shoppingcart.html">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span id="cartCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; display: none;">0</span>
+                        </a>
+                    </li>
+                    <!-- Account Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container mt-5 pt-5">
+        <h1 class="mb-4">Checkout</h1>
+        
+        <!-- Checkout Steps -->
+        <div class="checkout-steps">
+            <div class="checkout-step completed">
+                <div class="step-number">1</div>
+                <div class="step-title">Shopping Cart</div>
+            </div>
+            <div class="checkout-step active" id="shippingStep">
+                <div class="step-number">2</div>
+                <div class="step-title">Shipping Details</div>
+            </div>
+            <div class="checkout-step" id="paymentStep">
+                <div class="step-number">3</div>
+                <div class="step-title">Payment</div>
+            </div>
+            <div class="checkout-step" id="confirmationStep">
+                <div class="step-number">4</div>
+                <div class="step-title">Confirmation</div>
+            </div>
+        </div>
+        
+        <!-- Checkout Sections -->
+        <div class="row">
+            <!-- Left Column: Form Sections -->
+            <div class="col-lg-8">
+                <!-- Shipping Details Section -->
+                <div id="shippingDetailsSection" class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Shipping Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="shippingForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="fullName" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="fullName" name="fullName" required>
+                                    <div class="invalid-feedback" id="fullNameError"></div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <div class="invalid-feedback" id="emailError"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                    <div class="invalid-feedback" id="phoneError"></div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="alternatePhone" class="form-label">Alternate Phone (Optional)</label>
+                                    <input type="tel" class="form-control" id="alternatePhone" name="alternatePhone">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address *</label>
+                                <input type="text" class="form-control" id="address" name="address" required>
+                                <div class="invalid-feedback" id="addressError"></div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="landmark" class="form-label">Landmark (Optional)</label>
+                                <input type="text" class="form-control" id="landmark" name="landmark">
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="city" class="form-label">City *</label>
+                                    <input type="text" class="form-control" id="city" name="city" required>
+                                    <div class="invalid-feedback" id="cityError"></div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="state" class="form-label">State *</label>
+                                    <select class="form-select" id="state" name="state" required>
+                                        <option value="">Select State</option>
+                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chhattisgarh">Chhattisgarh</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Haryana">Haryana</option>
+                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                        <option value="Jharkhand">Jharkhand</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Manipur">Manipur</option>
+                                        <option value="Meghalaya">Meghalaya</option>
+                                        <option value="Mizoram">Mizoram</option>
+                                        <option value="Nagaland">Nagaland</option>
+                                        <option value="Odisha">Odisha</option>
+                                        <option value="Punjab">Punjab</option>
+                                        <option value="Rajasthan">Rajasthan</option>
+                                        <option value="Sikkim">Sikkim</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Telangana">Telangana</option>
+                                        <option value="Tripura">Tripura</option>
+                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                        <option value="Uttarakhand">Uttarakhand</option>
+                                        <option value="West Bengal">West Bengal</option>
+                                    </select>
+                                    <div class="invalid-feedback" id="stateError"></div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="pincode" class="form-label">Pincode *</label>
+                                    <input type="text" class="form-control" id="pincode" name="pincode" required>
+                                    <div class="invalid-feedback" id="pincodeError"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="saveAddress" name="saveAddress" checked>
+                                <label class="form-check-label" for="saveAddress">
+                                    Save this address for future orders
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Continue to Payment</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Payment Section (Initially Hidden) -->
+                <div id="paymentSection" class="card mb-4" style="display: none;">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Payment Method</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="payment-methods">
+                            <div class="payment-method selected" data-method="cod" onclick="selectPaymentMethod('cod')">
+                                <div class="payment-method-header">
+                                    <div class="payment-method-icon">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">Cash on Delivery</h6>
+                                        <small class="text-muted">Pay when you receive your order</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-method" data-method="card" onclick="selectPaymentMethod('card')">
+                                <div class="payment-method-header">
+                                    <div class="payment-method-icon">
+                                        <i class="fas fa-credit-card"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">Credit/Debit Card</h6>
+                                        <small class="text-muted">Visa, MasterCard, RuPay, and more</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-method-details mt-3" id="cardDetails" style="display: none;">
+                                    <div class="mb-3">
+                                        <label for="cardNumber" class="form-label">Card Number</label>
+                                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="expiryDate" class="form-label">Expiry Date</label>
+                                            <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="cvv" class="form-label">CVV</label>
+                                            <input type="text" class="form-control" id="cvv" placeholder="123">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nameOnCard" class="form-label">Name on Card</label>
+                                        <input type="text" class="form-control" id="nameOnCard">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-method" data-method="upi" onclick="selectPaymentMethod('upi')">
+                                <div class="payment-method-header">
+                                    <div class="payment-method-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">UPI</h6>
+                                        <small class="text-muted">Google Pay, PhonePe, Paytm, and more</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-method-details mt-3" id="upiDetails" style="display: none;">
+                                    <div class="mb-3">
+                                        <label for="upiId" class="form-label">UPI ID</label>
+                                        <input type="text" class="form-control" id="upiId" placeholder="yourname@upi">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-method" data-method="wallet" onclick="selectPaymentMethod('wallet')">
+                                <div class="payment-method-header">
+                                    <div class="payment-method-icon">
+                                        <i class="fas fa-wallet"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">Wallet</h6>
+                                        <small class="text-muted">Paytm, PhonePe, Amazon Pay, and more</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-method-details mt-3" id="walletDetails" style="display: none;">
+                                    <div class="mb-3">
+                                        <label for="walletType" class="form-label">Select Wallet</label>
+                                        <select class="form-select" id="walletType">
+                                            <option value="paytm">Paytm</option>
+                                            <option value="phonepe">PhonePe</option>
+                                            <option value="amazonpay">Amazon Pay</option>
+                                            <option value="mobikwik">MobiKwik</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-secondary me-2" onclick="backToShipping()">Back</button>
+                            <button type="button" class="btn btn-primary" onclick="placeOrder()">Place Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column: Order Summary -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Order Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="orderSummaryItems">
+                            <!-- Order items will be loaded here -->
+                            <div class="text-center">
+                                <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p>Loading your items...</p>
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal:</span>
+                            <span id="orderSubtotal">₹0</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Shipping:</span>
+                            <span id="orderShipping">₹0</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-2 fw-bold">
+                            <span>Total:</span>
+                            <span id="orderTotal">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer bg-light text-dark mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <!-- Contact Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Contact Information</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Head Office:</strong></p>
+                    <p>C-3, Sector 8, Noida, Uttar Pradesh - 201301</p>
+                </div>
+    
+                <!-- Policy Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Policy Information</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> Payment Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Privacy Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Return & Refund Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Shipping Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Terms and Conditions</li>
+                    </ul>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> Home</li>
+                        <li><i class="fas fa-check text-primary"></i> My Account</li>
+                        <li><i class="fas fa-check text-primary"></i> My Orders</li>
+                        <li><i class="fas fa-check text-primary"></i> About Us</li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Social Media & Payment Icons -->
+            <div class="row mt-4 text-center">
+                <div class="col-md-12">
+                    <!-- Social Media Icons -->
+                    <a href="#" class="mx-2"><i class="fab fa-facebook fa-2x text-primary"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-pinterest fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-instagram fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-linkedin fa-2x text-primary"></i></a>
+                </div>
+    
+                <!-- Payment Methods -->
+                <div class="col-md-12 mt-3">
+                    <img src="img/payments/visa.png" alt="Visa" width="50">
+                    <img src="img/payments/mastercard.png" alt="MasterCard" width="50">
+                    <img src="img/payments/upi.png" alt="UPI" width="50">
+                    <img src="img/payments/wallet.png" alt="Wallet" width="50">
+                </div>
+            </div>
+        </div>
+    
+        <!-- Copyright -->
+        <div class="text-center py-3 bg-secondary text-white">
+            Copyright © by Clan India Lifestyle 2025. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if cart is empty
+            const cartItems = getCartItems();
+            if (cartItems.length === 0) {
+                window.location.href = 'shoppingcart.html';
+                return;
+            }
+            
+            // Load order summary
+            loadOrderSummary();
+            
+            // Update cart count
+            updateCartCount();
+            
+            // Handle shipping form submission
+            document.getElementById('shippingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = {
+                    fullName: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    alternatePhone: document.getElementById('alternatePhone').value,
+                    address: document.getElementById('address').value,
+                    landmark: document.getElementById('landmark').value,
+                    city: document.getElementById('city').value,
+                    state: document.getElementById('state').value,
+                    pincode: document.getElementById('pincode').value,
+                    saveAddress: document.getElementById('saveAddress').checked
+                };
+                
+                // Validate form
+                const validation = validateCheckoutForm(formData);
+                
+                if (!validation.isValid) {
+                    // Show validation errors
+                    Object.keys(validation.errors).forEach(field => {
+                        const errorElement = document.getElementById(`${field}Error`);
+                        if (errorElement) {
+                            errorElement.textContent = validation.errors[field];
+                            document.getElementById(field).classList.add('is-invalid');
+                        }
+                    });
+                    return;
+                }
+                
+                // Clear validation errors
+                document.querySelectorAll('.is-invalid').forEach(element => {
+                    element.classList.remove('is-invalid');
+                });
+                
+                // Save shipping address
+                saveShippingAddress(formData);
+                
+                // Show payment section
+                document.getElementById('shippingDetailsSection').style.display = 'none';
+                document.getElementById('paymentSection').style.display = 'block';
+                
+                // Update checkout steps
+                document.getElementById('shippingStep').classList.remove('active');
+                document.getElementById('shippingStep').classList.add('completed');
+                document.getElementById('paymentStep').classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+        
+        function loadOrderSummary() {
+            const cartItems = getCartItems();
+            const orderSummaryItems = document.getElementById('orderSummaryItems');
+            
+            // Calculate totals
+            const subtotal = calculateCartTotal();
+            const shipping = subtotal >= 999 ? 0 : 99;
+            const total = subtotal + shipping;
+            
+            // Update order summary
+            document.getElementById('orderSubtotal').textContent = `₹${subtotal}`;
+            document.getElementById('orderShipping').textContent = shipping === 0 ? 'Free' : `₹${shipping}`;
+            document.getElementById('orderTotal').textContent = `₹${total}`;
+            
+            // Generate order items HTML
+            let itemsHTML = '';
+            
+            cartItems.forEach(item => {
+                itemsHTML += `
+                    <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                            <img src="${item.image}" alt="${item.name}" width="50" height="50" class="rounded">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-0">${item.name}</h6>
+                            <small class="text-muted">Size: ${item.size}, Color: ${item.color}</small>
+                            <div class="d-flex justify-content-between">
+                                <small>${item.quantity} × ${item.price}</small>
+                                <small>₹${parseFloat(item.price.replace(/[₹,]/g, '')) * item.quantity}</small>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            orderSummaryItems.innerHTML = itemsHTML;
+        }
+        
+        function selectPaymentMethod(method) {
+            // Update selected payment method
+            document.querySelectorAll('.payment-method').forEach(element => {
+                element.classList.remove('selected');
+            });
+            document.querySelector(`.payment-method[data-method="${method}"]`).classList.add('selected');
+            
+            // Hide all payment method details
+            document.querySelectorAll('.payment-method-details').forEach(element => {
+                element.style.display = 'none';
+            });
+            
+            // Show selected payment method details
+            const detailsElement = document.getElementById(`${method}Details`);
+            if (detailsElement) {
+                detailsElement.style.display = 'block';
+            }
+        }
+        
+        function backToShipping() {
+            // Show shipping section
+            document.getElementById('shippingDetailsSection').style.display = 'block';
+            document.getElementById('paymentSection').style.display = 'none';
+            
+            // Update checkout steps
+            document.getElementById('paymentStep').classList.remove('active');
+            document.getElementById('shippingStep').classList.remove('completed');
+            document.getElementById('shippingStep').classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        function placeOrder() {
+            // Get shipping address
+            const shippingAddress = getShippingAddress();
+            
+            // Get selected payment method
+            const paymentMethod = document.querySelector('.payment-method.selected').getAttribute('data-method');
+            
+            // Process checkout
+            const result = processCheckout(shippingAddress, paymentMethod);
+            
+            if (result.success) {
+                // Redirect to order confirmation page
+                window.location.href = `order-confirmation.html?orderId=${result.orderId}`;
+            } else {
+                // Show error message
+                alert(result.message);
+            }
+        }
+    </script>
+</body>
+</html>
+

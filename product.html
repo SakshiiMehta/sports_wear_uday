@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Clan India Lifestyle</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ai-features.css">
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary py-3 fixed-top">
+        <div class="container-fluid">
+            <!-- Left Side: Logo & Brand Name -->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/Logo/logo.jpg" width="130" height="100" alt="Logo">
+                <span class="ms-2 fw-bold">Clan India Lifestyle</span>
+            </a>
+
+            <!-- Hamburger Button (for mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Right Side: Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="shop.html">Shop</a>
+                    </li>
+                    <!-- AI Features Navigation -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-robot me-1"></i> AI Features
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="ai-assistant.html">AI Shopping Assistant</a></li>
+                            <li><a class="dropdown-item" href="virtual-stylist.html">Virtual Stylist</a></li>
+                            <li><a class="dropdown-item" href="personalized-recommendations.html">Personalized Recommendations</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <!-- Search Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </li>
+                    <!-- Shopping Cart Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="shoppingcart.html">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span id="cartCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; display: none;">0</span>
+                        </a>
+                    </li>
+                    <!-- Account Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- MAIN PRODUCT CONTENT -->
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <!-- Product Image -->
+            <div class="col-md-6">
+                <img id="productImage" src="img/products/default.jpg" alt="Product Image" class="img-fluid">
+            </div>
+            
+            <!-- Product Details -->
+            <div class="col-md-6">
+                <h2 id="productName"></h2>
+                <p id="productPrice"></p>
+                <p id="productDescription"></p>
+                
+                <form id="addToCartForm">
+                    <input type="hidden" id="productId" name="productId">
+                    
+                    <h5>Size:</h5>
+                    <div id="sizeOptions" class="mb-3"></div>
+                    
+                    <h5>Color:</h5>
+                    <div id="colorOptions" class="mb-3"></div>
+                    
+                    <div class="quantity-selector mb-3">
+                        <h5>Quantity:</h5>
+                        <div class="input-group" style="width: 150px;">
+                            <button type="button" class="btn btn-outline-secondary" id="decreaseQuantity">-</button>
+                            <input type="number" class="form-control text-center" id="quantity" name="quantity" value="1" min="1" max="10">
+                            <button type="button" class="btn btn-outline-secondary" id="increaseQuantity">+</button>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg">Add to Cart</button>
+                </form>
+                
+                <!-- Add to Cart Success Message -->
+                <div class="alert alert-success mt-3" id="addToCartSuccess" style="display: none;">
+                    <i class="fas fa-check-circle me-2"></i> Item added to cart!
+                    <div class="mt-2">
+                        <a href="shoppingcart.html" class="btn btn-sm btn-success">View Cart</a>
+                        <button class="btn btn-sm btn-outline-secondary" id="continueShopping">Continue Shopping</button>
+                    </div>
+                </div>
+                
+                <!-- AI Stylist Quick Access -->
+                <div class="mt-4 p-3 bg-light rounded">
+                    <h5><i class="fas fa-robot me-2"></i>AI Style Suggestions</h5>
+                    <p class="small">Not sure how to style this item?</p>
+                    <div class="d-flex gap-2">
+                        <a href="virtual-stylist.html" class="btn btn-sm btn-outline-primary">Get Outfit Ideas</a>
+                        <a href="ai-assistant.html" class="btn btn-sm btn-outline-secondary">Ask AI Assistant</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AI-Powered Recommendations -->
+        <div class="product-ai-recommendations mt-5">
+            <h3><i class="fas fa-robot me-2"></i>AI-Powered Recommendations</h3>
+            
+            <ul class="nav nav-tabs ai-recommendation-tabs" id="aiRecommendationTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="complete-outfit-tab" data-bs-toggle="tab" data-bs-target="#complete-outfit" type="button" role="tab" aria-controls="complete-outfit" aria-selected="true">Complete the Outfit</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="similar-products-tab" data-bs-toggle="tab" data-bs-target="#similar-products" type="button" role="tab" aria-controls="similar-products" aria-selected="false">Similar Products</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content p-3 border border-top-0 rounded-bottom" id="aiRecommendationTabsContent">
+                <div class="tab-pane fade show active" id="complete-outfit" role="tabpanel" aria-labelledby="complete-outfit-tab">
+                    <p>These items pair perfectly with this product to create a complete outfit:</p>
+                    <div class="complete-outfit-grid" id="completeOutfitContainer">
+                        <!-- Items will be populated here -->
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="similar-products" role="tabpanel" aria-labelledby="similar-products-tab">
+                    <p>You might also like these similar products:</p>
+                    <div class="similar-products-grid" id="similarProductsContainer">
+                        <!-- Products will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer bg-light text-dark mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <!-- Contact Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Contact Information</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Head Office:</strong></p>
+                    <p>C-3, Sector 8, Noida, Uttar Pradesh - 201301</p>
+                </div>
+    
+                <!-- Policy Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Policy Information</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> Payment Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Privacy Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Return & Refund Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Shipping Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Terms and Conditions</li>
+                    </ul>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> Home</li>
+                        <li><i class="fas fa-check text-primary"></i> My Account</li>
+                        <li><i class="fas fa-check text-primary"></i> My Orders</li>
+                        <li><i class="fas fa-check text-primary"></i> About Us</li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Social Media & Payment Icons -->
+            <div class="row mt-4 text-center">
+                <div class="col-md-12">
+                    <!-- Social Media Icons -->
+                    <a href="#" class="mx-2"><i class="fab fa-facebook fa-2x text-primary"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-pinterest fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-instagram fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-linkedin fa-2x text-primary"></i></a>
+                </div>
+    
+                <!-- Payment Methods -->
+                <div class="col-md-12 mt-3">
+                    <img src="img/payments/visa.png" alt="Visa" width="50">
+                    <img src="img/payments/mastercard.png" alt="MasterCard" width="50">
+                    <img src="img/payments/upi.png" alt="UPI" width="50">
+                    <img src="img/payments/wallet.png" alt="Wallet" width="50">
+                </div>
+            </div>
+        </div>
+    
+        <!-- Copyright -->
+        <div class="text-center py-3 bg-secondary text-white">
+            Copyright © by Clan India Lifestyle 2025. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Floating AI Assistant Button -->
+    <div class="floating-ai-button" id="floatingAiButton">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <!-- PRODUCT DATA SCRIPT -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('id') || "1"; // Default to product 1 if no ID provided
+
+            const products = {
+                "1": {
+                    id: "1",
+                    name: "Essential Gym Tank Top",
+                    price: "₹314",
+                    originalPrice: "₹349",
+                    description: "A lightweight and comfortable gym tank top for everyday workouts. Features moisture-wicking fabric and anti-microbial technology to keep you fresh during intense sessions.",
+                    image: "img/home/tanktops.jpg",
+                    sizes: ["S", "M", "L"],
+                    colors: ["red", "blue", "black"]
+                },
+                "2": {
+                    id: "2",
+                    name: "Performance Panelled T-Shirt",
+                    price: "₹404",
+                    originalPrice: "₹449",
+                    description: "High-performance t-shirt designed for athletes. Made with breathable, quick-dry fabric that keeps you comfortable during any activity. Features a modern fit with stylish panelling.",
+                    image: "img/home/tshirts.jpg",
+                    sizes: ["M", "L", "XL"],
+                    colors: ["green", "black", "blue"]
+                },
+                "3": {
+                    id: "3",
+                    name: "Flex-Fit Joggers",
+                    price: "₹599",
+                    originalPrice: "₹649",
+                    description: "Premium joggers with 4-way stretch technology for maximum comfort and flexibility. Perfect for workouts or casual wear with moisture-wicking fabric and stylish design.",
+                    image: "img/home/joggers.jpg",
+                    sizes: ["S", "M", "L", "XL"],
+                    colors: ["black", "gray", "navy"]
+                },
+                "4": {
+                    id: "4",
+                    name: "Quick-Dry Workout Shorts",
+                    price: "₹449",
+                    originalPrice: "₹499",
+                    description: "Lightweight, breathable shorts designed for intense workouts. Features quick-dry technology, built-in liner, and side pockets for convenience.",
+                    image: "img/home/shorts.jpg",
+                    sizes: ["S", "M", "L", "XL"],
+                    colors: ["black", "blue", "red"]
+                }
+            };
+
+            if (products[productId]) {
+                const product = products[productId];
+                
+                // Set product ID in hidden field
+                document.getElementById("productId").value = product.id;
+                
+                // Set product details
+                document.getElementById("productImage").src = product.image;
+                document.getElementById("productName").textContent = product.name;
+                document.getElementById("productPrice").innerHTML = `${product.price} <del>${product.originalPrice}</del>`;
+                document.getElementById("productDescription").textContent = product.description;
+
+                // Generate size options with radio buttons
+                const sizeOptionsContainer = document.getElementById("sizeOptions");
+                sizeOptionsContainer.innerHTML = product.sizes
+                    .map((size, index) => `
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="size" id="size${size}" value="${size}" ${index === 0 ? 'checked' : ''}>
+                            <label class="form-check-label" for="size${size}">${size}</label>
+                        </div>
+                    `).join("");
+
+                // Generate color options with radio buttons
+                const colorOptionsContainer = document.getElementById("colorOptions");
+                colorOptionsContainer.innerHTML = product.colors
+                    .map((color, index) => `
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="color" id="color${color}" value="${color}" ${index === 0 ? 'checked' : ''}>
+                            <label class="form-check-label" for="color${color}">
+                                <span class="color-swatch" style="background-color: ${color}; display: inline-block; width: 20px; height: 20px; border-radius: 50%; margin-right: 5px; vertical-align: middle;"></span>
+                                ${color.charAt(0).toUpperCase() + color.slice(1)}
+                            </label>
+                        </div>
+                    `).join("");
+                
+                // Setup quantity buttons
+                document.getElementById("decreaseQuantity").addEventListener("click", function() {
+                    const quantityInput = document.getElementById("quantity");
+                    if (quantityInput.value > 1) {
+                        quantityInput.value = parseInt(quantityInput.value) - 1;
+                    }
+                });
+                
+                document.getElementById("increaseQuantity").addEventListener("click", function() {
+                    const quantityInput = document.getElementById("quantity");
+                    if (quantityInput.value < 10) {
+                        quantityInput.value = parseInt(quantityInput.value) + 1;
+                    }
+                });
+                
+                // Handle form submission (Add to Cart)
+                document.getElementById("addToCartForm").addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    
+                    // Get selected options
+                    const selectedSize = document.querySelector('input[name="size"]:checked').value;
+                    const selectedColor = document.querySelector('input[name="color"]:checked').value;
+                    const quantity = parseInt(document.getElementById("quantity").value);
+                    
+                    // Create cart item
+                    const cartItem = {
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        size: selectedSize,
+                        color: selectedColor,
+                        quantity: quantity
+                    };
+                    
+                    // Add to cart
+                    addToCart(cartItem);
+                    
+                    // Show success message
+                    document.getElementById("addToCartSuccess").style.display = "block";
+                    
+                    // Scroll to success message
+                    document.getElementById("addToCartSuccess").scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                });
+                
+                // Continue shopping button
+                document.getElementById("continueShopping").addEventListener("click", function() {
+                    document.getElementById("addToCartSuccess").style.display = "none";
+                });
+                
+            } else {
+                document.querySelector(".container").innerHTML = "<h2 class='mt-5 pt-5 text-center'>Product Not Found</h2>";
+            }
+            
+            // Initialize AI features for product page
+            if (typeof initProductPageAi === 'function') {
+                initProductPageAi();
+            }
+            
+            // Setup floating button
+            document.getElementById('floatingAiButton').addEventListener('click', function() {
+                window.location.href = 'ai-assistant.html';
+            });
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="cart.js"></script>
+    <script src="ai-features.js"></script>
+</body>
+</html>
+

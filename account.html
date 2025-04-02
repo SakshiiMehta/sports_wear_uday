@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | Clan India Lifestyle</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .account-sidebar {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .account-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .account-menu-item {
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .account-menu-item:hover {
+            background-color: #e9ecef;
+        }
+        
+        .account-menu-item.active {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .account-menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .account-content {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .order-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .order-header {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .order-body {
+            padding: 15px;
+        }
+        
+        .order-product {
+            display: flex;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-product:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .order-product-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+        
+        .order-footer {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        
+        .address-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .address-actions {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        
+        .address-type {
+            display: inline-block;
+            padding: 2px 8px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .address-type.default {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary py-3 fixed-top">
+        <div class="container-fluid">
+            <!-- Left Side: Logo & Brand Name -->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/Logo/logo.jpg" width="130" height="100" alt="Logo">
+                <span class="ms-2 fw-bold">Clan India Lifestyle</span>
+            </a>
+
+            <!-- Hamburger Button (for mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Right Side: Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <!-- AI Features Navigation -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-robot me-1"></i> AI Features
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="ai-assistant.html">AI Shopping Assistant</a></li>
+                            <li><a class="dropdown-item" href="virtual-stylist.html">Virtual Stylist</a></li>
+                            <li><a class="dropdown-item" href="personalized-recommendations.html">Personalized Recommendations</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <!-- Search Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </li>
+                    <!-- Shopping Cart Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="shoppingcart.html">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span id="cartCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; display: none;">0</span>
+                        </a>
+                    </li>
+                    <!-- Account Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="account.html">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container mt-5 pt-5">
+        <h1 class="mb-4">My Account</h1>
+        
+        <!-- Login Required Message (Initially Hidden) -->
+        <div id="loginRequiredMessage" style="display: none;">
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle me-2"></i> You need to be logged in to access your account.
+            </div>
+            <p>Please <a href="login.html" class="btn btn-primary">Login</a> or <a href="signup.html" class="btn btn-outline-primary">Create an Account</a></p>
+        </div>
+        
+        <!-- Account Content (Initially Hidden) -->
+        <div id="accountContent" style="display: none;">
+            <div class="row">
+                <!-- Left Sidebar -->
+                <div class="col-md-3 mb-4">
+                    <div class="account-sidebar">
+                        <div class="text-center mb-4">
+                            <img src="https://via.placeholder.com/100" alt="Profile Avatar" class="profile-avatar">
+                            <h5 id="userFullName">John Doe</h5>
+                            <p class="text-muted" id="userEmail">john.doe@example.com</p>
+                        </div>
+                        
+                        <ul class="account-menu">
+                            <li class="account-menu-item active" data-section="dashboard">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </li>
+                            <li class="account-menu-item" data-section="orders">
+                                <i class="fas fa-shopping-bag"></i> My Orders
+                            </li>
+                            <li class="account-menu-item" data-section="addresses">
+                                <i class="fas fa-map-marker-alt"></i> Addresses
+                            </li>
+                            <li class="account-menu-item" data-section="profile">
+                                <i class="fas fa-user-edit"></i> Edit Profile
+                            </li>
+                            <li class="account-menu-item" data-section="password">
+                                <i class="fas fa-lock"></i> Change Password
+                            </li>
+                            <li class="account-menu-item" id="logoutButton">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Right Content -->
+                <div class="col-md-9">
+                    <!-- Dashboard Section -->
+                    <div class="account-content" id="dashboardSection">
+                        <h3>Dashboard</h3>
+                        <p>Welcome back, <span id="dashboardUserName">John</span>!</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-shopping-bag fa-3x text-primary mb-3"></i>
+                                        <h5 class="card-title">Orders</h5>
+                                        <p class="card-text" id="orderCount">0</p>
+                                        <button class="btn btn-sm btn-outline-primary" data-section="orders">View Orders</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-heart fa-3x text-danger mb-3"></i>
+                                        <h5 class="card-title">Wishlist</h5>
+                                        <p class="card-text">0</p>
+                                        <button class="btn btn-sm btn-outline-primary">View Wishlist</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-map-marker-alt fa-3x text-success mb-3"></i>
+                                        <h5 class="card-title">Addresses</h5>
+                                        <p class="card-text" id="addressCount">0</p>
+                                        <button class="btn btn-sm btn-outline-primary" data-section="addresses">View Addresses</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h4>Recent Orders</h4>
+                            <div id="recentOrders">
+                                <p class="text-muted">You haven't placed any orders yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Orders Section -->
+                    <div class="account-content" id="ordersSection" style="display: none;">
+                        <h3>My Orders</h3>
+                        <div id="ordersList">
+                            <p class="text-muted">You haven't placed any orders yet.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Addresses Section -->
+                    <div class="account-content" id="addressesSection" style="display: none;">
+                        <h3>My Addresses</h3>
+                        <div id="addressesList">
+                            <p class="text-muted">You haven't added any addresses yet.</p>
+                        </div>
+                        <button class="btn btn-primary mt-3" id="addAddressBtn">
+                            <i class="fas fa-plus me-2"></i> Add New Address
+                        </button>
+                        
+                        <!-- Add/Edit Address Form (Initially Hidden) -->
+                        <div class="mt-4" id="addressForm" style="display: none;">
+                            <h4 id="addressFormTitle">Add New Address</h4>
+                            <form id="saveAddressForm">
+                                <input type="hidden" id="addressId">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="addressName" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="addressName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="addressPhone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="addressPhone" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="addressLine1" class="form-label">Address Line 1</label>
+                                    <input type="text" class="form-control" id="addressLine1" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="addressLine2" class="form-label">Address Line 2 (Optional)</label>
+                                    <input type="text" class="form-control" id="addressLine2">
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="addressCity" class="form-label">City</label>
+                                        <input type="text" class="form-control" id="addressCity" required>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="addressState" class="form-label">State</label>
+                                        <select class="form-select" id="addressState" required>
+                                            <option value="">Select State</option>
+                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                            <option value="Assam">Assam</option>
+                                            <option value="Bihar">Bihar</option>
+                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                            <option value="Delhi">Delhi</option>
+                                            <option value="Goa">Goa</option>
+                                            <option value="Gujarat">Gujarat</option>
+                                            <option value="Haryana">Haryana</option>
+                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                            <option value="Jharkhand">Jharkhand</option>
+                                            <option value="Karnataka">Karnataka</option>
+                                            <option value="Kerala">Kerala</option>
+                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                            <option value="Maharashtra">Maharashtra</option>
+                                            <option value="Manipur">Manipur</option>
+                                            <option value="Meghalaya">Meghalaya</option>
+                                            <option value="Mizoram">Mizoram</option>
+                                            <option value="Nagaland">Nagaland</option>
+                                            <option value="Odisha">Odisha</option>
+                                            <option value="Punjab">Punjab</option>
+                                            <option value="Rajasthan">Rajasthan</option>
+                                            <option value="Sikkim">Sikkim</option>
+                                            <option value="Tamil Nadu">Tamil Nadu</option>
+                                            <option value="Telangana">Telangana</option>
+                                            <option value="Tripura">Tripura</option>
+                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                            <option value="Uttarakhand">Uttarakhand</option>
+                                            <option value="West Bengal">West Bengal</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="addressPincode" class="form-label">Pincode</label>
+                                        <input type="text" class="form-control" id="addressPincode" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="defaultAddress">
+                                    <label class="form-check-label" for="defaultAddress">
+                                        Set as default address
+                                    </label>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="addressType" class="form-label">Address Type</label>
+                                    <select class="form-select" id="addressType" required>
+                                        <option value="home">Home</option>
+                                        <option value="work">Work</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mt-3">
+                                    <button type="submit" class="btn btn-primary">Save Address</button>
+                                    <button type="button" class="btn btn-secondary" id="cancelAddressBtn">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Section -->
+                    <div class="account-content" id="profileSection" style="display: none;">
+                        <h3>Edit Profile</h3>
+                        <form id="profileForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="profileFirstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="profileFirstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="profileLastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="profileLastName" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="profileEmail" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="profileEmail" required readonly>
+                                <small class="text-muted">Email address cannot be changed</small>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="profilePhone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="profilePhone" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="profileGender" class="form-label">Gender</label>
+                                <select class="form-select" id="profileGender">
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer_not_to_say">Prefer not to say</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="profileBirthday" class="form-label">Birthday</label>
+                                <input type="date" class="form-control" id="profileBirthday">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Change Password Section -->
+                    <div class="account-content" id="passwordSection" style="display: none;">
+                        <h3>Change Password</h3>
+                        <form id="passwordForm">
+                            <div class="mb-3">
+                                <label for="currentPassword" class="form-label">Current Password</label>
+                                <input type="password" class="form-control" id="currentPassword" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="newPassword" class="form-label">New Password</label>
+                                <input type="password" class="form-control" id="newPassword" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                                <input type="password" class="form-control" id="confirmNewPassword" required>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Change Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer bg-light text-dark mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <!-- Contact Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Contact Information</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Head Office:</strong></p>
+                    <p>C-3, Sector 8, Noida, Uttar Pradesh - 201301</p>
+                </div>
+    
+                <!-- Policy Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Policy Information</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> Payment Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Privacy Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Return & Refund Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Shipping Policy</li>
+                        <li><i class="fas fa-check text-primary"></i> Terms and Conditions</li>
+                    </ul>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> Home</li>
+                        <li><i class="fas fa-check text-primary"></i> My Account</li>
+                        <li><i class="fas fa-check text-primary"></i> My Orders</li>
+                        <li><i class="fas fa-check text-primary"></i> About Us</li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Social Media & Payment Icons -->
+            <div class="row mt-4 text-center">
+                <div class="col-md-12">
+                    <!-- Social Media Icons -->
+                    <a href="#" class="mx-2"><i class="fab fa-facebook fa-2x text-primary"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-pinterest fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-instagram fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-linkedin fa-2x text-primary"></i></a>
+                </div>
+    
+                <!-- Payment Methods -->
+                <div class="col-md-12 mt-3">
+                    <img src="img/payments/visa.png" alt="Visa" width="50">
+                    <img src="img/payments/mastercard.png" alt="MasterCard" width="50">
+                    <img src="img/payments/upi.png" alt="UPI" width="50">
+                    <img src="img/payments/wallet.png" alt="Wallet" width="50">
+                </div>
+            </div>
+        </div>
+    
+        <!-- Copyright -->
+        <div class="text-center py-3 bg-secondary text-white">
+            Copyright © by Clan India Lifestyle 2025. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="cart.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update cart count
+            if (typeof updateCartCount === 'function') {
+                updateCartCount();
+            }
+            
+            // Check if user is logged in
+            if (!isLoggedIn()) {
+                // Show login required message
+                document.getElementById('loginRequiredMessage').style.display = 'block';
+                document.getElementById('accountContent').style.display = 'none';
+                return;
+            }
+            
+            // User is logged in, show account content
+            document.getElementById('loginRequiredMessage').style.display = 'none';
+            document.getElementById('accountContent').style.display = 'block';
+            
+            // Load user data
+            const user = getCurrentUser();
+            
+            // Update user info in sidebar
+            document.getElementById('userFullName').textContent = `${user.firstName} ${user.lastName}`;
+            document.getElementById('userEmail').textContent = user.email;
+            document.getElementById('dashboardUserName').textContent = user.firstName;
+            
+            // Load user profile data
+            document.getElementById('profileFirstName').value = user.firstName;
+            document.getElementById('profileLastName').value = user.lastName;
+            document.getElementById('profileEmail').value = user.email;
+            document.getElementById('profilePhone').value = user.phone || '';
+            if (user.gender) document.getElementById('profileGender').value = user.gender;
+            if (user.birthday) document.getElementById('profileBirthday').value = user.birthday;
+            
+            // Load orders
+            loadOrders();
+            
+            // Load addresses
+            loadAddresses();
+            
+            // Handle menu item clicks
+            document.querySelectorAll('.account-menu-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    if (this.id === 'logoutButton') {
+                        // Handle logout
+                        logout();
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    
+                    // Update active menu item
+                    document.querySelectorAll('.account-menu-item').forEach(menuItem => {
+                        menuItem.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Show corresponding section
+                    const sectionId = this.getAttribute('data-section');
+                    document.querySelectorAll('.account-content').forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    document.getElementById(`${sectionId}Section`).style.display = 'block';
+                });
+            });
+            
+            // Handle dashboard section buttons
+            document.querySelectorAll('[data-section]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    
+                    // Update active menu item
+                    document.querySelectorAll('.account-menu-item').forEach(menuItem => {
+                        menuItem.classList.remove('active');
+                        if (menuItem.getAttribute('data-section') === sectionId) {
+                            menuItem.classList.add('active');
+                        }
+                    });
+                    
+                    // Show corresponding section
+                    document.querySelectorAll('.account-content').forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    document.getElementById(`${sectionId}Section`).style.display = 'block';
+                });
+            });
+            
+            // Handle add address button
+            document.getElementById('addAddressBtn').addEventListener('click', function() {
+                // Reset form
+                document.getElementById('addressFormTitle').textContent = 'Add New Address';
+                document.getElementById('saveAddressForm').reset();
+                document.getElementById('addressId').value = '';
+                
+                // Show form
+                document.getElementById('addressForm').style.display = 'block';
+                this.style.display = 'none';
+            });
+            
+            // Handle cancel address button
+            document.getElementById('cancelAddressBtn').addEventListener('click', function() {
+                document.getElementById('addressForm').style.display = 'none';
+                document.getElementById('addAddressBtn').style.display = 'block';
+            });
+            
+            // Handle save address form
+            document.getElementById('saveAddressForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const addressId = document.getElementById('addressId').value;
+                const address = {
+                    id: addressId || Date.now().toString(),
+                    name: document.getElementById('addressName').value,
+                    phone: document.getElementById('addressPhone').value,
+                    line1: document.getElementById('addressLine1').value,
+                    line2: document.getElementById('addressLine2').value,
+                    city: document.getElementById('addressCity').value,
+                    state: document.getElementById('addressState').value,
+                    pincode: document.getElementById('addressPincode').value,
+                    type: document.getElementById('addressType').value,
+                    isDefault: document.getElementById('defaultAddress').checked
+                };
+                
+                // Save address
+                saveAddress(address);
+                
+                // Hide form and show add button
+                document.getElementById('addressForm').style.display = 'none';
+                document.getElementById('addAddressBtn').style.display = 'block';
+                
+                // Reload addresses
+                loadAddresses();
+            });
+            
+            // Handle profile form
+            document.getElementById('profileForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const updatedUser = {
+                    ...user,
+                    firstName: document.getElementById('profileFirstName').value,
+                    lastName: document.getElementById('profileLastName').value,
+                    phone: document.getElementById('profilePhone').value,
+                    gender: document.getElementById('profileGender').value,
+                    birthday: document.getElementById('profileBirthday').value
+                };
+                
+                // Update user
+                updateUser(updatedUser);
+                
+                // Show success message
+                alert('Profile updated successfully!');
+                
+                // Update user info in sidebar
+                document.getElementById('userFullName').textContent = `${updatedUser.firstName} ${updatedUser.lastName}`;
+                document.getElementById('dashboardUserName').textContent = updatedUser.firstName;
+            });
+            
+            // Handle password form
+            document.getElementById('passwordForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+                
+                // Check if current password is correct
+                if (currentPassword !== user.password) {
+                    alert('Current password is incorrect');
+                    return;
+                }
+                
+                // Check if new passwords match
+                if (newPassword !== confirmNewPassword) {
+                    alert('New passwords do not match');
+                    return;
+                }
+                
+                // Update password
+                const updatedUser = {
+                    ...user,
+                    password: newPassword
+                };
+                
+                updateUser(updatedUser);
+                
+                // Show success message
+                alert('Password changed successfully!');
+                
+                // Reset form
+                this.reset();
+            });
+        });
+        
+        // Function to load orders
+        function loadOrders() {
+            // Get orders from localStorage (for demo purposes)
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            
+            // Update order count
+            document.getElementById('orderCount').textContent = orders.length;
+            
+            // If no orders, return
+            if (orders.length === 0) {
+                return;
+            }
+            
+            // Generate HTML for recent orders (dashboard)
+            let recentOrdersHTML = '';
+            
+            // Show only the last 3 orders
+            const recentOrders = orders.slice(0, 3);
+            
+            recentOrders.forEach(order => {
+                recentOrdersHTML += `
+                    <div class="order-card">
+                        <div class="order-header d-flex justify-content-between">
+                            <div>
+                                <strong>Order #${order.id}</strong>
+                                <div class="text-muted">Placed on ${new Date(order.date).toLocaleDateString()}</div>
+                            </div>
+                            <div>
+                                <span class="badge bg-success">${order.status}</span>
+                            </div>
+                        </div>
+                        <div class="order-body">
+                            ${order.items.slice(0, 2).map(item => `
+                                <div class="order-product">
+                                    <img src="${item.image}" alt="${item.name}" class="order-product-image">
+                                    <div>
+                                        <h6>${item.name}</h6>
+                                        <div class="text-muted">Size: ${item.size}, Color: ${item.color}</div>
+                                        <div>${item.quantity} × ${item.price}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                            ${order.items.length > 2 ? `<div class="text-muted">+ ${order.items.length - 2} more items</div>` : ''}
+                        </div>
+                        <div class="order-footer d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Total: ₹${order.total}</strong>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary">View Details</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('recentOrders').innerHTML = recentOrdersHTML;
+            
+            // Generate HTML for all orders
+            let ordersHTML = '';
+            
+            orders.forEach(order => {
+                ordersHTML += `
+                    <div class="order-card">
+                        <div class="order-header d-flex justify-content-between">
+                            <div>
+                                <strong>Order #${order.id}</strong>
+                                <div class="text-muted">Placed on ${new Date(order.date).toLocaleDateString()}</div>
+                            </div>
+                            <div>
+                                <span class="badge bg-success">${order.status}</span>
+                            </div>
+                        </div>
+                        <div class="order-body">
+                            ${order.items.map(item => `
+                                <div class="order-product">
+                                    <img src="${item.image}" alt="${item.name}" class="order-product-image">
+                                    <div>
+                                        <h6>${item.name}</h6>
+                                        <div class="text-muted">Size: ${item.size}, Color: ${item.color}</div>
+                                        <div>${item.quantity} × ${item.price}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="order-footer d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Total: ₹${order.total}</strong>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-outline-primary me-2">Track Order</button>
+                                <button class="btn btn-sm btn-outline-secondary">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('ordersList').innerHTML = ordersHTML;
+        }
+        
+        // Function to load addresses
+        function loadAddresses() {
+            // Get user
+            const user = getCurrentUser();
+            
+            // Get addresses
+            const addresses = user.addresses || [];
+            
+            // Update address count
+            document.getElementById('addressCount').textContent = addresses.length;
+            
+            // If no addresses, return
+            if (addresses.length === 0) {
+                return;
+            }
+            
+            // Generate HTML for addresses
+            let addressesHTML = '';
+            
+            addresses.forEach(address => {
+                addressesHTML += `
+                    <div class="address-card">
+                        <div class="address-actions">
+                            <button class="btn btn-sm btn-outline-primary edit-address" data-id="${address.id}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger delete-address" data-id="${address.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <span class="address-type ${address.isDefault ? 'default' : ''}">${address.isDefault ? 'Default' : ''} ${address.type.charAt(0).toUpperCase() + address.type.slice(1)}</span>
+                        <h5>${address.name}</h5>
+                        <p>${address.line1}</p>
+                        ${address.line2 ? `<p>${address.line2}</p>` : ''}
+                        <p>${address.city}, ${address.state} - ${address.pincode}</p>
+                        <p>Phone: ${address.phone}</p>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('addressesList').innerHTML = addressesHTML;
+            
+            // Add event listeners for edit and delete buttons
+            document.querySelectorAll('.edit-address').forEach(button => {
+                button.addEventListener('click', function() {
+                    const addressId = this.getAttribute('data-id');
+                    editAddress(addressId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-address').forEach(button => {
+                button.addEventListener('click', function() {
+                    const addressId = this.getAttribute('data-id');
+                    deleteAddress(addressId);
+                });
+            });
+        }
+        
+        // Function to edit address
+        function editAddress(addressId) {
+            // Get user
+            const user = getCurrentUser();
+            
+            // Get address
+            const address = user.addresses.find(addr => addr.id === addressId);
+            
+            if (!address) return;
+            
+            // Set form title
+            document.getElementById('addressFormTitle').textContent = 'Edit Address';
+            
+            // Fill form with address data
+            document.getElementById('addressId').value = address.id;
+            document.getElementById('addressName').value = address.name;
+            document.getElementById('addressPhone').value = address.phone;
+            document.getElementById('addressLine1').value = address.line1;
+            document.getElementById('addressLine2').value = address.line2 || '';
+            document.getElementById('addressCity').value = address.city;
+            document.getElementById('addressState').value = address.state;
+            document.getElementById('addressPincode').value = address.pincode;
+            document.getElementById('addressType').value = address.type;
+            document.getElementById('defaultAddress').checked = address.isDefault;
+            
+            // Show form and hide add button
+            document.getElementById('addressForm').style.display = 'block';
+            document.getElementById('addAddressBtn').style.display = 'none';
+        }
+        
+        // Function to delete address
+        function deleteAddress(addressId) {
+            if (!confirm('Are you sure you want to delete this address?')) return;
+            
+            // Get user
+            const user = getCurrentUser();
+            
+            // Remove address
+            user.addresses = user.addresses.filter(addr => addr.id !== addressId);
+            
+            // Update user
+            updateUser(user);
+            
+            // Reload addresses
+            loadAddresses();
+        }
+        
+        // Function to save address
+        function saveAddress(address) {
+            // Get user
+            const user = getCurrentUser();
+            
+            // Initialize addresses array if it doesn't exist
+            if (!user.addresses) {
+                user.addresses = [];
+            }
+            
+            // If this is set as default, unset default for all other addresses
+            if (address.isDefault) {
+                user.addresses.forEach(addr => {
+                    addr.isDefault = false;
+                });
+            }
+            
+            // Check if address already exists
+            const existingIndex = user.addresses.findIndex(addr => addr.id === address.id);
+            
+            if (existingIndex > -1) {
+                // Update existing address
+                user.addresses[existingIndex] = address;
+            } else {
+                // Add new address
+                user.addresses.push(address);
+            }
+            
+            // Update user
+            updateUser(user);
+        }
+    </script>
+</body>
+</html>
+
