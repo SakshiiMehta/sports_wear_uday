@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Policy - Clan India Lifestyle</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .policy-header {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        
+        .policy-title {
+            font-weight: 700;
+            color: #007bff;
+        }
+        
+        .policy-subtitle {
+            color: #6c757d;
+            font-size: 1.2rem;
+        }
+        
+        .policy-content {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .policy-content h2 {
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .policy-content h3 {
+            color: #343a40;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .policy-content p, .policy-content ul {
+            color: #6c757d;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .policy-content ul {
+            padding-left: 20px;
+        }
+        
+        .policy-content ul li {
+            margin-bottom: 10px;
+        }
+        
+        .policy-content .table {
+            margin-bottom: 30px;
+        }
+        
+        .policy-content .table th {
+            background-color: #f8f9fa;
+        }
+        
+        .policy-content .alert {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary py-3 fixed-top">
+        <div class="container-fluid">
+            <!-- Left Side: Logo & Brand Name -->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/Logo/logo.jpg" width="130" height="100" alt="Logo">
+                <span class="ms-2 fw-bold">Clan India Lifestyle</span>
+            </a>
+
+            <!-- Hamburger Button (for mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Right Side: Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <!-- Search Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </li>
+                    <!-- Shopping Cart Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="shoppingcart.html">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span id="cartCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; display: none;">0</span>
+                        </a>
+                    </li>
+                    <!-- Account Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- POLICY HEADER -->
+    <header class="policy-header">
+        <div class="container text-center">
+            <h1 class="policy-title">Payment Policy</h1>
+            <p class="policy-subtitle">Information about our payment methods and processes</p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="policy-content">
+            <h2>Payment Methods</h2>
+            <p>At Clan India Lifestyle, we offer various payment methods to ensure a convenient shopping experience. You can choose from the following payment options:</p>
+            
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Payment Method</th>
+                            <th>Description</th>
+                            <th>Processing Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Credit/Debit Cards</td>
+                            <td>We accept Visa, MasterCard, and RuPay cards</td>
+                            <td>Instant</td>
+                        </tr>
+                        <tr>
+                            <td>UPI</td>
+                            <td>Google Pay, PhonePe, Paytm, and other UPI apps</td>
+                            <td>Instant</td>
+                        </tr>
+                        <tr>
+                            <td>Net Banking</td>
+                            <td>All major banks supported</td>
+                            <td>Instant</td>
+                        </tr>
+                        <tr>
+                            <td>Wallets</td>
+                            <td>Paytm, PhonePe, Amazon Pay</td>
+                            <td>Instant</td>
+                        </tr>
+                        <tr>
+                            <td>Cash on Delivery (COD)</td>
+                            <td>Pay when you receive your order</td>
+                            <td>At delivery</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h2>Payment Security</h2>
+            <p>We take payment security very seriously. All payment transactions are processed through secure and encrypted channels. We use Razorpay, a trusted payment gateway, to ensure that your payment information is protected.</p>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i> We never store your complete credit card information on our servers.
+            </div>
+            
+            <h2>Payment Process</h2>
+            <ol>
+                <li>Select your products and add them to your cart</li>
+                <li>Proceed to checkout</li>
+                <li>Fill in your shipping details</li>
+                <li>Choose your preferred payment method</li>
+                <li>Complete the payment</li>
+                <li>Receive order confirmation</li>
+            </ol>
+            
+            <h3>Credit/Debit Card Payments</h3>
+            <p>When paying with a credit or debit card, you will need to provide the following information:</p>
+            <ul>
+                <li>Card number</li>
+                <li>Cardholder name</li>
+                <li>Expiry date</li>
+                <li>CVV (the 3-digit code on the back of your card)</li>
+            </ul>
+            
+            <h3>UPI Payments</h3>
+            <p>For UPI payments, you will be redirected to your UPI app or you can scan a QR code to complete the payment.</p>
+            
+            <h3>Cash on Delivery</h3>
+            <p>Cash on Delivery is available for orders under ₹10,000. Please note that our delivery personnel may carry a card machine for your convenience.</p>
+            
+            <h2>Billing</h2>
+            <p>After your order is placed, you will receive an email with your invoice. You can also view your order details and download invoices from your account dashboard.</p>
+            
+            <h2>Refunds</h2>
+            <p>In case of a refund, the amount will be credited back to the original payment method used for the purchase. The time taken for the refund to reflect in your account depends on your bank or payment provider:</p>
+            <ul>
+                <li>Credit/Debit Cards: 5-7 business days</li>
+                <li>UPI/Net Banking: 3-5 business days</li>
+                <li>Wallets: 1-2 business days</li>
+            </ul>
+            
+            <p>For more information about refunds, please refer to our <a href="return-policy.html">Return & Refund Policy</a>.</p>
+            
+            <h2>Contact Us</h2>
+            <p>If you have any questions or concerns about our payment policy, please contact our customer service team:</p>
+            <ul>
+                <li>Email: payments@clanindialifestyle.com</li>
+                <li>Phone: +91 98765 43210</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer bg-light text-dark mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <!-- Contact Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Contact Information</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Head Office:</strong></p>
+                    <p>C-3, Sector 8, Noida, Uttar Pradesh - 201301</p>
+                </div>
+    
+                <!-- Policy Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Policy Information</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> <a href="payment-policy.html" class="text-decoration-none text-dark">Payment Policy</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="privacy-policy.html" class="text-decoration-none text-dark">Privacy Policy</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="return-policy.html" class="text-decoration-none text-dark">Return & Refund Policy</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="shipping-policy.html" class="text-decoration-none text-dark">Shipping Policy</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="terms.html" class="text-decoration-none text-dark">Terms and Conditions</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> <a href="index.html" class="text-decoration-none text-dark">Home</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="account.html" class="text-decoration-none text-dark">My Account</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="account.html#ordersSection" class="text-decoration-none text-dark">My Orders</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="about.html" class="text-decoration-none text-dark">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Social Media & Payment Icons -->
+            <div class="row mt-4 text-center">
+                <div class="col-md-12">
+                    <!-- Social Media Icons -->
+                    <a href="#" class="mx-2"><i class="fab fa-facebook fa-2x text-primary"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-pinterest fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-instagram fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-linkedin fa-2x text-primary"></i></a>
+                </div>
+    
+                <!-- Payment Methods -->
+                <div class="col-md-12 mt-3">
+                    <img src="img/payments/visa.png" alt="Visa" width="50">
+                    <img src="img/payments/mastercard.png" alt="MasterCard" width="50">
+                    <img src="img/payments/upi.png" alt="UPI" width="50">
+                    <img src="img/payments/wallet.png" alt="Wallet" width="50">
+                </div>
+            </div>
+        </div>
+    
+        <!-- Copyright -->
+        <div class="text-center py-3 bg-secondary text-white">
+            Copyright © by Clan India Lifestyle 2025. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update cart count
+            if (typeof updateCartCount === 'function') {
+                updateCartCount();
+            }
+        });
+    </script>
+</body>
+</html>
+

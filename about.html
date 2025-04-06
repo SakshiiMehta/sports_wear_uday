@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Clan India Lifestyle</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .about-header {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        
+        .about-title {
+            font-weight: 700;
+            color: #007bff;
+        }
+        
+        .about-subtitle {
+            color: #6c757d;
+            font-size: 1.2rem;
+        }
+        
+        .about-section {
+            margin-bottom: 60px;
+        }
+        
+        .about-section-title {
+            font-weight: 600;
+            color: #007bff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .about-section-title i {
+            margin-right: 10px;
+        }
+        
+        .team-member {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 5px solid #f8f9fa;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .team-member h5 {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .team-member p {
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #f8f9fa;
+            color: #007bff;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .timeline:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            margin-left: -1px;
+            background-color: #e9ecef;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            min-height: 50px;
+        }
+        
+        .timeline-item:after, .timeline-item:before {
+            display: table;
+            content: " ";
+        }
+        
+        .timeline-item:after {
+            clear: both;
+        }
+        
+        .timeline-panel {
+            position: relative;
+            float: left;
+            width: 46%;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-panel {
+            float: right;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-panel:before {
+            content: "";
+            position: absolute;
+            top: 26px;
+            right: -15px;
+            border-top: 15px solid transparent;
+            border-left: 15px solid #fff;
+            border-right: 0 solid #fff;
+            border-bottom: 15px solid transparent;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-panel:before {
+            content: "";
+            position: absolute;
+            top: 26px;
+            left: -15px;
+            border-top: 15px solid transparent;
+            border-left: 0 solid #fff;
+            border-right: 15px solid #fff;
+            border-bottom: 15px solid transparent;
+        }
+        
+        .timeline-badge {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: -25px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 1.4em;
+            line-height: 50px;
+            background-color: #007bff;
+            color: #fff;
+            z-index: 100;
+        }
+        
+        .timeline-title {
+            margin-top: 0;
+            font-weight: 600;
+            color: #007bff;
+        }
+        
+        .timeline-date {
+            display: block;
+            margin-bottom: 10px;
+            color: #6c757d;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background-color: #f8f9fa;
+            font-size: 0.9rem;
+            color: #007bff;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-badge:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .stats-container {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+        
+        .architecture-diagram {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .architecture-diagram img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .code-snippet {
+            background-color: #282c34;
+            color: #abb2bf;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        
+        .code-snippet pre {
+            margin: 0;
+        }
+        
+        .code-comment {
+            color: #98c379;
+        }
+        
+        .code-keyword {
+            color: #c678dd;
+        }
+        
+        .code-string {
+            color: #e5c07b;
+        }
+        
+        .code-function {
+            color: #61afef;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary py-3 fixed-top">
+        <div class="container-fluid">
+            <!-- Left Side: Logo & Brand Name -->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/Logo/logo.jpg" width="130" height="100" alt="Logo">
+                <span class="ms-2 fw-bold">Clan India Lifestyle</span>
+            </a>
+
+            <!-- Hamburger Button (for mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Right Side: Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <!-- AI Features Navigation -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-robot me-1"></i> Advanced Features
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="3d-product-viewer.html">3D Product Viewer</a></li>
+                            <li><a class="dropdown-item" href="size-recommendation.html">AI Size Recommendation</a></li>
+                            <li><a class="dropdown-item" href="performance-analytics.html">Performance Analytics</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <!-- Search Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </li>
+                    <!-- Shopping Cart Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="shoppingcart.html">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span id="cartCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; display: none;">0</span>
+                        </a>
+                    </li>
+                    <!-- Account Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ABOUT HEADER -->
+    <header class="about-header">
+        <div class="container text-center">
+            <h1 class="about-title">About Clan India Lifestyle</h1>
+            <p class="about-subtitle">Our Journey, Mission, and Technical Implementation</p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <!-- Our Story Section -->
+        <section class="about-section">
+            <h2 class="about-section-title"><i class="fas fa-book-open"></i> Our Story</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Clan India Lifestyle was founded in 2023 by a group of engineering students passionate about combining technology and fashion. What started as a final year engineering project has now evolved into a full-fledged e-commerce platform specializing in high-performance sportswear.</p>
+                    <p>Our journey began with a simple idea: to create a sportswear brand that leverages cutting-edge technology to provide the best shopping experience and product quality. We spent months researching fabric technologies, e-commerce platforms, and user experience design to build a brand that stands out in the crowded sportswear market.</p>
+                </div>
+                <div class="col-md-6">
+                    <p>Today, Clan India Lifestyle is known for its innovative approach to sportswear retail, incorporating advanced features like 3D product visualization, AI-powered size recommendations, and real-time performance analytics.</p>
+                    <p>Our team of engineers continues to push the boundaries of what's possible in e-commerce, constantly improving our platform and products to provide the best possible experience for our customers.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Our Mission Section -->
+        <section class="about-section">
+            <h2 class="about-section-title"><i class="fas fa-bullseye"></i> Our Mission</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>At Clan India Lifestyle, our mission is to revolutionize the sportswear industry by combining cutting-edge technology with high-quality, performance-driven products. We aim to:</p>
+                    <ul>
+                        <li><strong>Innovate:</strong> Continuously push the boundaries of what's possible in e-commerce and sportswear technology.</li>
+                        <li><strong>Empower:</strong> Help our customers achieve their fitness goals with clothing that enhances performance.</li>
+                        <li><strong>Sustain:</strong> Implement eco-friendly practices in our production and operations to minimize environmental impact.</li>
+                        <li><strong>Educate:</strong> Share our knowledge and expertise with the community through our blog and resources.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Key Statistics -->
+        <section class="about-section">
+            <h2 class="about-section-title"><i class="fas fa-chart-bar"></i> Key Statistics</h2>
+            <div class="stats-container">
+                <div class="row">
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <div class="stat-value">5000+</div>
+                            <div class="stat-label">Products Sold</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">Customer Satisfaction</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <div class="stat-value">15+</div>
+                            <div class="stat-label">Tech Innovations</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <div class="stat-value">24/7</div>
+                            <div class="stat-label">Customer Support</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Our Team Section -->
+        <section class="about-section">
+            <h2 class="about-section-title"><i class="fas fa-users"></i> Our Team</h2>
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="team-member">
+                        <img src="/placeholder.svg?height=150&width=150" alt="Team Member">
+                        <h5>Rahul Sharma</h5>
+                        <p>Founder & Lead Developer</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="team-member">
+                        <img src="/placeholder.svg?height=150&width=150" alt="Team Member">
+                        <h5>Priya Patel</h5>
+                        <p>UI/UX Designer</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-dribbble"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-behance"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="team-member">
+                        <img src="/placeholder.svg?height=150&width=150" alt="Team Member">
+                        <h5>Amit Kumar</h5>
+                        <p>Backend Developer</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-stack-overflow"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="team-member">
+                        <img src="/placeholder.svg?height=150&width=150" alt="Team Member">
+                        <h5>Neha Singh</h5>
+                        <p>AI & ML Engineer</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-kaggle"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Technical Implementation Section -->
+        <section class="about-section">
+            <h2 class="about-section-title"><i class="fas fa-code"></i> Technical Implementation</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>As a final year engineering project, Clan India Lifestyle showcases a range of advanced technical implementations:</p>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h4>Frontend Technologies</h4>
+                    <div class="tech-stack">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">JavaScript ES6+</span>
+                        <span class="tech-badge">Bootstrap 5</span>
+                        <span class="tech-badge">Chart.js</span>
+                        <span class="tech-badge">Three.js</span>
+                        <span class="tech-badge">Web Components</span>
+                        <span class="tech-badge">Service Workers</span>
+                        <span class="tech-badge">WebSockets</span>
+                    </div>
+

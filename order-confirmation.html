@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Clan India Lifestyle</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .confirmation-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .confirmation-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .confirmation-icon {
+            font-size: 5rem;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        
+        .confirmation-title {
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        
+        .confirmation-subtitle {
+            color: #6c757d;
+            font-size: 1.2rem;
+        }
+        
+        .order-details {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .order-id {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .order-date {
+            color: #6c757d;
+        }
+        
+        .order-status {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .order-items {
+            margin-bottom: 30px;
+        }
+        
+        .order-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+        
+        .item-details {
+            flex: 1;
+        }
+        
+        .item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .item-meta {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .item-price {
+            font-weight: 600;
+            color: #007bff;
+            text-align: right;
+            min-width: 100px;
+        }
+        
+        .order-summary {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .summary-row.total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-top: 1px solid #dee2e6;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        
+        .shipping-details, .payment-details {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        
+        .address-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .payment-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            color: #007bff;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .action-button {
+            padding: 12px 30px;
+            font-weight: 600;
+        }
+        
+        .tracking-info {
+            background-color: #e9f7fe;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 5px solid #007bff;
+        }
+        
+        .tracking-title {
+            font-weight: 600;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        
+        .tracking-number {
+            font-family: monospace;
+            font-size: 1.1rem;
+            background-color: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px dashed #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary py-3 fixed-top">
+        <div class="container-fluid">
+            <!-- Left Side: Logo & Brand Name -->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/Logo/logo.jpg" width="130" height="100" alt="Logo">
+                <span class="ms-2 fw-bold">Clan India Lifestyle</span>
+            </a>
+
+            <!-- Hamburger Button (for mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Right Side: Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <!-- Search Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    </li>
+                    <!-- Shopping Cart Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="shoppingcart.html">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span id="cartCountBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; display: none;">0</span>
+                        </a>
+                    </li>
+                    <!-- Account Icon -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="account.html">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container mt-5 pt-5">
+        <div class="confirmation-container">
+            <div class="confirmation-header">
+                <i class="fas fa-check-circle confirmation-icon"></i>
+                <h1 class="confirmation-title">Order Confirmed!</h1>
+                <p class="confirmation-subtitle">Thank you for your purchase. Your order has been received.</p>
+            </div>
+            
+            <!-- Order Details -->
+            <div class="order-details">
+                <div class="order-header">
+                    <div>
+                        <div class="order-id">Order #<span id="orderId">ORD123456789</span></div>
+                        <div class="order-date" id="orderDate">June 15, 2023</div>
+                    </div>
+                    <div class="order-status">Confirmed</div>
+                </div>
+                
+                <div class="order-items" id="orderItems">
+                    <!-- Order items will be loaded here -->
+                    <div class="order-item">
+                        <img src="img/home/tanktops.jpg" alt="Product" class="item-image">
+                        <div class="item-details">
+                            <div class="item-name">Essential Gym Tank Top</div>
+                            <div class="item-meta">Size: M, Color: Red, Qty: 1</div>
+                        </div>
+                        <div class="item-price">₹314</div>
+                    </div>
+                    <div class="order-item">
+                        <img src="img/home/joggers.jpg" alt="Product" class="item-image">
+                        <div class="item-details">
+                            <div class="item-name">Flex-Fit Joggers</div>
+                            <div class="item-meta">Size: L, Color: Black, Qty: 1</div>
+                        </div>
+                        <div class="item-price">₹599</div>
+                    </div>
+                </div>
+                
+                <div class="order-summary">
+                    <div class="summary-row">
+                        <div>Subtotal</div>
+                        <div id="subtotal">₹913</div>
+                    </div>
+                    <div class="summary-row">
+                        <div>Shipping</div>
+                        <div id="shipping">Free</div>
+                    </div>
+                    <div class="summary-row">
+                        <div>Tax</div>
+                        <div id="tax">₹0</div>
+                    </div>
+                    <div class="summary-row total">
+                        <div>Total</div>
+                        <div id="total">₹913</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tracking Information -->
+            <div class="tracking-info">
+                <h3 class="tracking-title">Tracking Information</h3>
+                <p>Your order has been confirmed and is being processed. Once your order ships, you will receive a tracking number.</p>
+                <p>Estimated delivery: <strong id="estimatedDelivery">June 20, 2023</strong></p>
+                <div id="trackingNumberContainer" style="display: none;">
+                    <p>Tracking Number:</p>
+                    <div class="tracking-number" id="trackingNumber">ABCD1234567890</div>
+                </div>
+            </div>
+            
+            <!-- Shipping Details -->
+            <div class="shipping-details">
+                <h3 class="section-title">Shipping Details</h3>
+                <div class="address-card" id="shippingAddress">
+                    <p><strong id="shippingName">John Doe</strong></p>
+                    <p id="shippingAddressLine">123 Main Street, Apartment 4B</p>
+                    <p><span id="shippingCity">New Delhi</span>, <span id="shippingState">Delhi</span> - <span id="shippingPincode">110001</span></p>
+                    <p>Phone: <span id="shippingPhone">+91 98765 43210</span></p>
+                </div>
+            </div>
+            
+            <!-- Payment Details -->
+            <div class="payment-details">
+                <h3 class="section-title">Payment Details</h3>
+                <div class="payment-method">
+                    <i class="fas fa-credit-card payment-icon"></i>
+                    <div>
+                        <p class="mb-0"><strong id="paymentMethod">Credit Card</strong></p>
+                        <p class="mb-0" id="paymentDetails">Visa ending in 1234</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="index.html" class="btn btn-outline-primary action-button">Continue Shopping</a>
+                <a href="account.html#ordersSection" class="btn btn-primary action-button">View My Orders</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer bg-light text-dark mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <!-- Contact Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Contact Information</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Head Office:</strong></p>
+                    <p>C-3, Sector 8, Noida, Uttar Pradesh - 201301</p>
+                </div>
+    
+                <!-- Policy Information -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Policy Information</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> <a href="payment-policy.html" class="text-decoration-none text-dark">Payment Policy</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="privacy-policy.html" class="text-decoration-none text-dark">Privacy Policy</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="return-policy.html" class="text-decoration-none text-dark">Return & Refund Policy</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="shipping-policy.html" class="text-decoration-none text-dark">Shipping Policy</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="terms.html" class="text-decoration-none text-dark">Terms and Conditions</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <h5 class="text-primary">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-primary"></i> <a href="index.html" class="text-decoration-none text-dark">Home</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="account.html" class="text-decoration-none text-dark">My Account</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="account.html#ordersSection" class="text-decoration-none text-dark">My Orders</a></li>
+                        <li><i class="fas fa-check text-primary"></i> <a href="about.html" class="text-decoration-none text-dark">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Social Media & Payment Icons -->
+            <div class="row mt-4 text-center">
+                <div class="col-md-12">
+                    <!-- Social Media Icons -->
+                    <a href="#" class="mx-2"><i class="fab fa-facebook fa-2x text-primary"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-pinterest fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-instagram fa-2x text-danger"></i></a>
+                    <a href="#" class="mx-2"><i class="fab fa-linkedin fa-2x text-primary"></i></a>
+                </div>
+    
+                <!-- Payment Methods -->
+                <div class="col-md-12 mt-3">
+                    <img src="img/payments/visa.png" alt="Visa" width="50">
+                    <img src="img/payments/mastercard.png" alt="MasterCard" width="50">
+                    <img src="img/payments/upi.png" alt="UPI" width="50">
+                    <img src="img/payments/wallet.png" alt="Wallet" width="50">
+                </div>
+            </div>
+        </div>
+    
+        <!-- Copyright -->
+        <div class="text-center py-3 bg-secondary text-white">
+            Copyright © by Clan India Lifestyle 2025. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get order ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('orderId');
+            
+            if (orderId) {
+                document.getElementById('orderId').textContent = orderId;
+            }
+            
+            // Set current date
+            const today = new Date();
+            document.getElementById('orderDate').textContent = today.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            // Set estimated delivery date (5 days from now)
+            const estimatedDelivery = new Date();
+            estimatedDelivery.setDate(today.getDate() + 5);
+            document.getElementById('estimatedDelivery').textContent = estimatedDelivery.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            // Load order details from localStorage if available
+            const orderDetails = JSON.parse(localStorage.getItem('lastOrder'));
+            if (orderDetails) {
+                // Update order items
+                if (orderDetails.items && orderDetails.items.length > 0) {
+                    let orderItemsHTML = '';
+                    let subtotal = 0;
+                    
+                    orderDetails.items.forEach(item => {
+                        const price = parseFloat(item.price.replace(/[₹,]/g, ''));
+                        subtotal += price * item.quantity;
+                        
+                        orderItemsHTML += `
+                            <div class="order-item">
+                                <img src="${item.image}" alt="${item.name}" class="item-image">
+                                <div class="item-details">
+                                    <div class="item-name">${item.name}</div>
+                                    <div class="item-meta">Size: ${item.size}, Color: ${item.color}, Qty: ${item.quantity}</div>
+                                </div>
+                                <div class="item-price">₹${price * item.quantity}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    document.getElementById('orderItems').innerHTML = orderItemsHTML;
+                    
+                    // Update order summary
+                    document.getElementById('subtotal').textContent = `₹${subtotal}`;
+                    document.getElementById('shipping').textContent = subtotal >= 999 ? 'Free' : '₹99';
+                    const shipping = subtotal >= 999 ? 0 : 99;
+                    document.getElementById('total').textContent = `₹${subtotal + shipping}`;
+                }
+                
+                // Update shipping address
+                if (orderDetails.shippingAddress) {
+                    document.getElementById('shippingName').textContent = orderDetails.shippingAddress.name;
+                    document.getElementById('shippingAddressLine').textContent = orderDetails.shippingAddress.line1 + 
+                        (orderDetails.shippingAddress.line2 ? ', ' + orderDetails.shippingAddress.line2 : '');
+                    document.getElementById('shippingCity').textContent = orderDetails.shippingAddress.city;
+                    document.getElementById('shippingState').textContent = orderDetails.shippingAddress.state;
+                    document.getElementById('shippingPincode').textContent = orderDetails.shippingAddress.pincode;
+                    document.getElementById('shippingPhone').textContent = orderDetails.shippingAddress.phone;
+                }
+                
+                // Update payment method
+                if (orderDetails.paymentMethod) {
+                    let paymentMethodText = '';
+                    let paymentDetailsText = '';
+                    
+                    switch (orderDetails.paymentMethod) {
+                        case 'cod':
+                            paymentMethodText = 'Cash on Delivery';
+                            paymentDetailsText = 'Pay when you receive your order';
+                            break;
+                        case 'card':
+                            paymentMethodText = 'Credit/Debit Card';
+                            paymentDetailsText = 'Card ending in ' + (orderDetails.cardDetails ? orderDetails.cardDetails.slice(-4) : '****');
+                            break;
+                        case 'upi':
+                            paymentMethodText = 'UPI';
+                            paymentDetailsText = orderDetails.upiId || 'UPI Payment';
+                            break;
+                        case 'wallet':
+                            paymentMethodText = 'Wallet';
+                            paymentDetailsText = orderDetails.walletType || 'Digital Wallet';
+                            break;
+                        default:
+                            paymentMethodText = 'Online Payment';
+                            paymentDetailsText = 'Payment completed';
+                    }
+                    
+                    document.getElementById('paymentMethod').textContent = paymentMethodText;
+                    document.getElementById('paymentDetails').textContent = paymentDetailsText;
+                }
+            }
+            
+            // Clear cart after order confirmation
+            localStorage.removeItem('cart');
+        });
+    </script>
+</body>
+</html>
+
